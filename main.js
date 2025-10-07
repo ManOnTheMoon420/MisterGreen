@@ -288,3 +288,133 @@ document.addEventListener('DOMContentLoaded', () => {
   loadProducts();
   updateCartBadge();
 });
+/* =============================
+   CONFIG – ปรับให้เป็นของร้านคุณ
+================================*/
+const WHATSAPP_NUMBER = "+66875658825'; // เบอร์แบบรหัสประเทศ
+const LINE_OPEN_URL ='https://line.me/ti/p/kcBcS1-8Dp'; // ลิงก์แอด/แชทร้าน
+const STORE_NAME = 'MR.GREEN Cannabis Shop';
+const STORE_URL = 'https://www.mistergreencannbisshop.com'; // หรือโดเมนจริงของคุณ
+
+/* =============================
+   ตัวอย่างโครงตะกร้า (ถ้ายังไม่มี)
+   cart = [{ id, name, price, qty }]
+================================*/
+let cart = cart || []; // ถ้ามี cart อยู่แล้วจะไม่ทับ
+
+// formatter เงิน THB
+const fmtTHB = new Intl.NumberFormat('th-TH', { style:'currency', currency:'THB', maximumFractionDigits:0 });
+
+// อัพเดต UI ตะกร้าอย่างง่าย
+function renderCart() {
+  const wrap = document.getElementById('cartItems');
+  const totalEl = document.getElementById('cartTotal');
+  if (!wrap || !totalEl) return;
+
+  if (cart.length === 0) {
+    wrap.innerHTML = '<p>ตะกร้ายังว่างอยู่</p>';
+    totalEl.textContent = fmtTHB.format(0);
+    return;
+  }
+
+  let html = '';
+  let total = 0;
+  cart.forEach((it, idx) => {
+    const line = it.price * it.qty;
+    total += line;
+    html += `
+      <div class="cart-row">
+        <div class="cart-name">${it.name}</div>
+        <div class="cart-qty">x${it.qty}</div>
+        <div class="cart-price">${fmtTHB.format(line)}</div>
+        <button class="cart-remove" data-idx="${idx}">ลบ</button>
+      </div>
+    `;
+  });
+  wrap.innerHTML = html;
+  totalEl.textContent = fmtTHB.format(total);
+
+  // bind ลบ
+  wrap.querySelectorAll('.cart-remove').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      const idx = +e.currentTarget.dataset.idx;
+      cart.splice(idx,1);
+      renderCart();
+    });
+  });
+}
+
+// ฟังก์ชันเพิ่มสินค้าเข้าตะกร้า (เรียกจากปุ่ม Add to Cart ของแต่ละสินค้า)
+function addToCart(product) {
+  // product: {id, name, price}
+  const found = cart.find(it => it.id === product.id);
+  if (found) found.qty += 1;
+  else cart.push({ ...product, qty: 1 });
+  renderCart();
+}
+
+// สร้างข้อความสรุปรายการออเดอร์สำหรับส่งแชท
+function buildCartMessage() {
+  if (cart.length === 0) return '';
+
+  const ts = new Date().toLocaleString('th-TH');
+  let totalQty = 0;
+  let total = 0;
+  const lines = cart.map((it, idx) => {
+    const line = it.price * it.qty;
+    totalQty += it.qty;
+    total += line;
+    return `${idx+1}. ${it.name} x${it.qty} = ${fmtTHB.format(line)}`;
+  });
+
+  const msg =
+`🛒 ${STORE_NAME} – Order Draft
+วันที่: ${ts}
+
+รายการ:
+${lines.join('\n')}
+
+รวมจำนวน: ${totalQty} ชิ้น
+ยอดรวมทั้งสิ้น: ${fmtTHB.format(total)}
+
+โปรดพิมพ์:
+• ชื่อ-นามสกุล
+• เบอร์โทร
+• ช่องทางรับสินค้า/ที่อยู่จัดส่ง
+
+ดูสินค้าเพิ่มเติม: ${STORE_URL}
+(ข้อความนี้ถูกสร้างอัตโนมัติจากหน้าตะกร้า)`;
+
+  return msg;
+}
+
+// เปิด WhatsApp พร้อมข้อความ
+function checkoutWhatsApp() {
+  if (cart.length === 0) { alert('ตะกร้ายังว่างอยู่'); return; }
+  const text = encodeURIComponent(buildCartMessage());
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+  window.open(url, '_blank');
+}
+
+// เปิด LINE พร้อมข้อความ (ผ่าน Share URL)
+function checkoutLINE() {
+  if (cart.length === 0) { alert('ตะกร้ายังว่างอยู่'); return; }
+  const text = encodeURIComponent(buildCartMessage() + `\n\nติดต่อร้าน: ${LINE_OPEN_URL}`);
+  // โหมดแชร์ข้อความ
+  const shareUrl = `https://line.me/R/msg/text/?${text}`;
+  // ถ้าต้องการเปิดห้องแชท OA โดยตรง (แนะนำบนมือถือ): ใช้ LINE_OPEN_URL
+  window.open(shareUrl, '_blank');
+}
+
+// bind ปุ่มเช็คเอาต์
+document.getElementById('checkout-wa')?.addEventListener('click', checkoutWhatsApp);
+document.getElementById('checkout-line')?.addEventListener('click', checkoutLINE);
+
+// เรียกครั้งแรกให้วาด UI ตะกร้า
+renderCart();
+
+/* ===== ตัวอย่าง: วิธีเรียก addToCart จากปุ่มสินค้า =====
+<button onclick="addToCart({id:'black-cherry-runtz', name:'Black Cherry Runtz (Sativa)', price:650})">
+  Add to Cart
+</button>
+=========================================================*/
