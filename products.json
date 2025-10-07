@@ -1,0 +1,84 @@
+[
+  {
+    "id": "black-cherry-runtz",
+    "name": "Black Cherry Runtz",
+    "type": "Indica",
+    "thc": 28,
+    "price": 300,
+    "stock": 10,
+    "image": "assets/products/black-cherry-runtz.jpg"
+  },
+  {
+    "id": "strawberry-bule",
+    "name": "Strawberry Bule",
+    "type": "Sativa",
+    "thc": 30,
+    "price": 300,
+    "stock": 25,
+    "image": "assets/products/strawberry-bule.jpg"
+  },
+  {
+    "id": "super-boof",
+    "name": "Super Boof",
+    "type": "Sativa",
+    "thc": 29,
+    "price": 300,
+    "stock": 35,
+    "image": "assets/products/super-boof.jpg"
+  },
+  {
+    "id": "the-zoap",
+    "name": "The Zoap",
+    "type": "Sativa",
+    "thc": 29,
+    "price": 300,
+    "stock": 20,
+    "image": "assets/products/the-zoap.jpg"
+  },
+  {
+    "id": "cookies-n-cream",
+    "name": "Cookies N Cream",
+    "type": "Sativa",
+    "thc": 28,
+    "price": 300,
+    "stock": 10,
+    "image": "assets/products/cookies-n-cream.jpg"
+  },
+  {
+    "id": "lemon-diesel",
+    "name": "Lemon Diesel",
+    "type": "Sativa",
+    "thc": 30,
+    "price": 400,
+    "stock": 30,
+    "image": "assets/products/lemon-diesel.jpg"
+  },
+  {
+    "id": "special-queen",
+    "name": "Special Queen",
+    "type": "Hybrid",
+    "thc": 29,
+    "price": 400,
+    "stock": 40,
+    "image": "assets/products/special-queen.jpg"
+  }
+  {
+    "id":  "Sour-Apple",
+    "name": "Sour Apple",
+    "type": "Indica",
+    "thc": 29,
+    "price": 300,
+    "stock": 30,
+    "image": "assets/products/sour-apple.jpg"
+  }
+
+  {
+    "id": "Sub-Zero",
+    "name": "Sub Zero",
+    "type": "Hybrid",
+    "thc": 29,
+    "price": 400,
+    "stock": 40,
+    "image": "assets/products/special-queen.jpg"
+  }
+]
