@@ -18,9 +18,9 @@ const products = [
   { id:"p5", name:"Cookies N Cream", strain:"Sativa", thc:28, price:300, stock:11, img:"assets/products/cookies-n-cream.jpg" },
   { id:"p6", name:"Lemon Diesel", strain:"Sativa", thc:30, price:400, stock:9, img:"assets/products/lemon-diesel.jpg" },
   { id:"p7", name:"Special Queen", strain:"Sativa", thc:29, price:400, stock:13, img:"assets/products/special-queen.jpg" },
-  { id:"p8", name:"Sour Apple", strain:"Indica", thc:29, price:300, stock:13, img:"assets/products/special-queen.jpg" },
-  { id:"p9", name:"Night Move", strain:"Indica", thc:29, price:400, stock:13, img:"assets/products/special-queen.jpg" },
-  { id:"p10", name:"Big Ripper", strain:"Indica", thc:28, price:300, stock:13, img:"assets/products/special-queen.jpg" },
+  { id:"p8", name:"Sour Apple", strain:"Indica", thc:29, price:300, stock:13, img:"assets/products/sour-apple.jpg" },
+  { id:"p9", name:"Night Move", strain:"Indica", thc:29, price:400, stock:13, img:"assets/products/night-move.jpg" },
+  { id:"p10", name:"Big Ripper", strain:"Indica", thc:28, price:300, stock:13, img:"assets/products/big-ripper.jpg" },
 ];
 
 /* =========
