@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MR. GREEN — Curated Cannabis. Crafted Experience.</title>
   <meta name="theme-color" content="#0e0f10" />
+  <link rel="icon" href="assets/logo/favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <!-- Header -->
   <header class="site-header">
     <div class="brand">
+      <!-- โลโก้หลัก -->
       <img src="assets/logo.png" alt="Mr. Green Logo" class="logo" />
       <div class="brand-text">
         <h1>MR. GREEN</h1>
@@ -19,9 +22,14 @@
     </div>
 
     <div class="header-actions">
+      <!-- ตัวบอกว่าจะส่งผ่านช่องทางใด (เปลี่ยนข้อความจาก JS ตามภาษาหรือแชนเนล) -->
       <span id="channelHint" class="hint">Sending via LINE</span>
-      <button class="btn" id="langBtn" onclick="toggleLang()">🌏 Language</button>
-      <button id="cartBtn" class="cart-btn" aria-label="Open cart">
+
+      <!-- สลับภาษา (ถ้ามีใน main.js) -->
+      <button class="btn" id="langBtn" type="button" onclick="toggleLang()">Language</button>
+
+      <!-- ปุ่มเปิดตะกร้า -->
+      <button id="cartBtn" class="cart-btn" aria-label="Open cart" type="button">
         🛒 <span id="cartCount" class="badge">0</span>
       </button>
     </div>
@@ -30,54 +38,58 @@
   <!-- Catalog -->
   <main class="container">
     <h2 class="section-title">Premium Selection</h2>
+    <!-- สินค้าจะถูกใส่โดย main.js -->
     <div id="productGrid" class="grid"></div>
   </main>
 
-  <!-- Cart Drawer -->
-  <aside id="cartDrawer" class="drawer" aria-hidden="true">
-    <div class="drawer-head">
-      <h3>Cart</h3>
-      <button id="closeDrawer" class="icon-btn" aria-label="Close">✕</button>
+  <!-- Cart Drawer (ใส่หลัง main ก่อน script) -->
+  <div id="cartOverlay" class="drawer-overlay" aria-hidden="true"></div>
+
+  <aside id="cartDrawer" class="drawer" aria-hidden="true" aria-labelledby="cartTitle" role="dialog">
+    <header class="drawer-head">
+      <h3 id="cartTitle">ตะกร้าสินค้า</h3>
+      <button id="closeCart" class="icon-btn" aria-label="Close" type="button">✕</button>
+    </header>
+
+    <div id="cartItems" class="drawer-body">
+      <!-- แถวสินค้าในตะกร้าจะถูก render ด้วย main.js -->
     </div>
-    <div id="cartItems" class="drawer-body"></div>
-    <div class="drawer-foot">
+
+    <footer class="drawer-foot">
       <div class="total">
-        <span>Total</span>
+        <span>รวมทั้งหมด</span>
         <strong id="cartTotal">฿0</strong>
       </div>
-      <button class="primary" id="checkoutBtn" disabled>Checkout (Demo)</button>
-      <p class="note">* Demo only — no real payment is processed.</p>
-    </div>
+
+      <div class="checkout-actions">
+        <button id="checkout-wa" class="btn wa" type="button">Checkout on WhatsApp</button>
+        <button id="checkout-line" class="btn line" type="button">Checkout on LINE</button>
+      </div>
+
+      <p class="note">Demo only — no real payment is processed.</p>
+    </footer>
   </aside>
 
-  <!-- Lightbox (image zoom) -->
+  <!-- Toast (แจ้งเตือนสั้น ๆ) -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-hidden="true"></div>
+
+  <!-- Lightbox แสดงภาพสินค้า (ถ้าใช้) -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
     <img id="lightboxImg" alt="Preview" />
-    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close" type="button">✕</button>
   </div>
 
-  <!-- Success Modal -->
-  <div id="successModal" class="modal" aria-hidden="true">
+  <!-- Success Modal (ถ้าต้องการโชว์หลังส่งออเดอร์ไปแชท) -->
+  <div id="successModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="successTitle">
     <div class="modal-card">
       <h3 id="successTitle">Order sent!</h3>
       <p id="successBody">Thank you. We’ve received your message.</p>
-      <button class="primary" onclick="closeSuccess()">OK</button>
+      <button class="btn primary" onclick="closeSuccess()" type="button">OK</button>
     </div>
   </div>
 
-  <!-- Toast -->
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
+  <!-- Scripts -->
   <script src="main.js"></script>
 </body>
 </html>
-<link rel="icon" href="assets/logo/favicon.png">
-<header class="topbar">
-  <img src="assets/logo/logo.png" alt="Mr. Green Cannabis Shop" class="logo">
-  ...
-</header>
-
-<main id="catalog" class="grid"></main>
-
-<script src="main.js"></script>
