@@ -1,32 +1,27 @@
 <!doctype html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MR. GREEN — Curated Cannabis. Crafted Experience.</title>
   <meta name="theme-color" content="#0e0f10" />
-  <link rel="icon" href="assets/logo/logo.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Header -->
   <header class="site-header">
     <div class="brand">
-      <img src="assets/logo/logo.png" alt="Mr. Green Logo" class="logo" />
+      <img src="assets/logo.png" alt="Mr. Green Logo" class="logo" />
       <div class="brand-text">
-        <h1 class="brand-name">MR. GREEN</h1>
+        <h1>MR. GREEN</h1>
         <p class="tagline">Curated Cannabis. Crafted Experience.</p>
       </div>
     </div>
 
     <div class="header-actions">
-      <span id="channelHint" class="hint">ช่องทางส่งคำสั่งซื้อ: <strong id="channelLabel">LINE</strong></span>
-      <div class="split">
-        <button class="btn" id="chooseLineBtn" aria-label="Send via LINE">LINE</button>
-        <button class="btn ghost" id="chooseWhatsAppBtn" aria-label="Send via WhatsApp">WhatsApp</button>
-      </div>
-
-      <button id="cartBtn" class="cart-btn" aria-label="Open cart" onclick="toggleCart(true)">
+      <span id="channelHint" class="hint">Sending via LINE</span>
+      <button class="btn" id="langBtn" onclick="toggleLang()">🌏 Language</button>
+      <button id="cartBtn" class="cart-btn" aria-label="Open cart">
         🛒 <span id="cartCount" class="badge">0</span>
       </button>
     </div>
@@ -41,30 +36,34 @@
   <!-- Cart Drawer -->
   <aside id="cartDrawer" class="drawer" aria-hidden="true">
     <div class="drawer-head">
-      <h3>ตะกร้าสินค้า</h3>
-      <button id="closeDrawer" class="icon-btn" aria-label="Close" onclick="toggleCart(false)">✕</button>
+      <h3>Cart</h3>
+      <button id="closeDrawer" class="icon-btn" aria-label="Close">✕</button>
     </div>
-
     <div id="cartItems" class="drawer-body"></div>
-
     <div class="drawer-foot">
       <div class="total">
-        <span>รวมทั้งหมด</span>
+        <span>Total</span>
         <strong id="cartTotal">฿0</strong>
       </div>
-      <div class="split">
-        <button class="btn ghost" onclick="clearCart()">ล้างตะกร้า</button>
-        <button class="btn primary" id="checkoutBtn" disabled onclick="checkout()">ส่งคำสั่งซื้อ</button>
-      </div>
-      <p class="note">* ระบบสาธิต — จะส่งรายการไปที่แชทของคุณ (ไม่มีการชำระเงินจริง)</p>
+      <button class="primary" id="checkoutBtn" disabled>Checkout (Demo)</button>
+      <p class="note">* Demo only — no real payment is processed.</p>
     </div>
   </aside>
 
-  <!-- Lightbox (ดูรูปใหญ่) -->
+  <!-- Lightbox (image zoom) -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
     <img id="lightboxImg" alt="Preview" />
     <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <h3 id="successTitle">Order sent!</h3>
+      <p id="successBody">Thank you. We’ve received your message.</p>
+      <button class="primary" onclick="closeSuccess()">OK</button>
+    </div>
   </div>
 
   <!-- Toast -->
@@ -73,3 +72,12 @@
   <script src="main.js"></script>
 </body>
 </html>
+<link rel="icon" href="assets/logo/favicon.png">
+<header class="topbar">
+  <img src="assets/logo/logo.png" alt="Mr. Green Cannabis Shop" class="logo">
+  ...
+</header>
+
+<main id="catalog" class="grid"></main>
+
+<script src="main.js"></script>
