@@ -215,3 +215,76 @@ renderProducts();
 updateCart();
 updateChannelHint();
 el('#langBtn') && (el('#langBtn').textContent = currentLang==="EN" ? "🌏 Language" : "🌏 ภาษา");
+// โหลดสินค้าแบบไดนามิกจาก data/products.json
+async function loadProducts() {
+  try {
+    const res = await fetch('data/products.json', { cache: 'no-store' });
+    const items = await res.json();
+    renderProducts(items);
+  } catch (err) {
+    console.error('Load products failed:', err);
+    document.getElementById('catalog').innerHTML =
+      `<p class="error">Cannot load products. Please refresh.</p>`;
+  }
+}
+
+// วาดการ์ดสินค้า
+function renderProducts(items) {
+  const wrap = document.getElementById('catalog');
+  wrap.innerHTML = items.map(p => `
+    <article class="card" data-id="${p.id}">
+      <div class="card-media">
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+        <span class="chip">${p.type}</span>
+        <span class="chip thc">THC ${p.thc}%</span>
+      </div>
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <p class="muted">Price</p>
+        <div class="price-row">
+          <strong class="price">${p.price.toLocaleString()} THB</strong>
+          <span class="stock ${p.stock>0?'in':'out'}">
+            ${p.stock>0?`Stock: ${p.stock}`:'Out of stock'}
+          </span>
+        </div>
+        <button class="btn add" ${p.stock>0?'':'disabled'}>Add to Cart</button>
+      </div>
+    </article>
+  `).join('');
+
+  wrap.querySelectorAll('.btn.add').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = e.currentTarget.closest('.card').dataset.id;
+      addToCart(id);
+    });
+  });
+}
+
+// ตะกร้าแบบง่าย
+const cart = {};
+function addToCart(id){
+  cart[id] = (cart[id] || 0) + 1;
+  toast('Added to cart');
+  updateCartBadge();
+}
+function updateCartBadge(){
+  const total = Object.values(cart).reduce((a,b)=>a+b,0);
+  const badge = document.querySelector('.cart-badge');
+  if (!badge) return;
+  badge.textContent = total;
+  badge.style.display = total ? 'inline-flex' : 'none';
+}
+function toast(msg){
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(()=> el.classList.add('show'), 10);
+  setTimeout(()=> { el.classList.remove('show'); el.remove(); }, 2200);
+}
+
+// เริ่มทำงาน
+document.addEventListener('DOMContentLoaded', () => {
+  loadProducts();
+  updateCartBadge();
+});
