@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mr.Green Green Cannabis Shop | Strains Add</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <span class="brand-sub">Mister</span><span class="brand-main">Green</span>
+    </div>
+    <nav class="main-nav">
+      <a href="#">หน้าแรก</a>
+      <a href="#catalog">สินค้า</a>
+      <a href="#about">ใบอนุญาต</a>
+      <a href="#contact">ติดต่อเรา</a>
+      <a href="#cart">ตะกร้า</a>
+    </nav>
+  </header>
+
+  <section class="hero" aria-label="แนะนำร้าน">
+    <div class="hero-content">
+      <h1>ช่อดอกปักตะกล้า ดีไซน์หรู สีทอง-ดำ-เขียว</h1>
+      <p>สินค้าคุณภาพเยี่ยม พร้อมใบอนุญาตถูกต้องตามกฎหมาย</p>
+      <a href="#catalog" class="btn-primary">ดูสินค้า</a>
+    </div>
+  </section>
+
+  <section id="catalog" class="section">
+    <h2>สินค้ายอดนิยม</h2>
+    <div class="grid">
+      <!-- ตัวอย่างสินค้า -->
+      <div class="card">
+        <img src="images/wreath1.jpg" alt="ช่อดอกปักตะกล้า สีทอง" />
+        <h3>ช่อดอกปักตะกล้า สีทอง</h3>
+        <p>ชุดหรูหรา เหมาะสำหรับงานพิธี</p>
+        <span class="price">฿1,500</span>
+        <button class="btn" onclick="addToCart('ทอง-001')">หยิบใส่ตะกร้า</button>
+      </div>
+      <div class="card">
+        <img src="images/wreath2.jpg" alt="ช่อดอกปักตะกล้า สีเขียว-ดำ" />
+        <h3>ช่อดอกปักตะกล้า สีเขียว-ดำ</h3>
+        <p>ดีไซน์เรียบหรู เข้ากับทุกงาน</p>
+        <span class="price">฿1,200</span>
+        <button class="btn" onclick="addToCart('เขียว-002')">หยิบใส่ตะกร้า</button>
+      </div>
+      <!-- เพิ่มสินค้าเพิ่มเติมได้ -->
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>ใบอนุญาตและมาตรฐาน</h2>
+    <p>บริษัท Mister Green ได้รับใบอนุญาตจำหน่ายช่อดอกกัญชาตามกฎหมายที่เกี่ยวข้อง รูปแบบธุรกิจถูกต้อง ปลอดภัย และมีการเก็บหลักฐานการชำระเงินตามมาตรฐานความปลอดภัย</p>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>ติดต่อเรา</h2>
+    <form id="contactForm" onsubmit="return false;">
+      <input type="text" placeholder="ชื่อ" required />
+      <input type="email" placeholder="อีเมล" required />
+      <textarea placeholder="ข้อความ" required></textarea>
+      <button class="btn-primary" type="submit">ส่งข้อความ</button>
+    </form>
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; www.mistergreencannabisshop.com สงวนลิขสิทธิ์</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mr.Green Cannabis Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ส่วนหัว -->
+  <header class="hero">
+    <img src="assets/images/mrgreen-logo.png" alt="Mr.Green Cannabis Shop Logo" class="logo">
+    <h1>Mr.Green Cannabis Shop</h1>
+    <p class="tagline">Curated Cannabis. Crafted Experience. Phuket | Premium Selection | Vinyl Vibes</p>
+  </header>
+
+  <!-- เนื้อหาหลัก -->
+  <main class="content">
+    <section>
+      <h2>Welcome to Mr.Green Cannabis Shop</h2>
+      <p>
+        Located in Rawai, Phuket — blending cannabis culture, art, and music.<br>
+        Explore premium strains, rolling papers, glass bongs, and chill vinyl vibes.
+      </p>
+    </section>
+  </main>
+
+  <!-- ส่วนท้าย -->
+  <footer>
+    <p>© 2025 Mr.Green Cannabis Shop — All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
+
+<!-- PRODUCTS -->
+<section class="products container" id="menu">
+  <h2>Menu</h2>
+  <div id="product-grid" class="grid"></div>
+</section>
