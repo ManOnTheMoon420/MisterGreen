@@ -1,113 +1,171 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mr.Green Green Cannabis Shop | Strains Add</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MR. GREEN — Curated Cannabis. Crafted Experience.</title>
+  <meta name="theme-color" content="#0e0f10" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Header -->
   <header class="site-header">
-    <div class="logo">
-      <span class="brand-sub">Mister</span><span class="brand-main">Green</span>
+    <div class="brand">
+      <img src="assets/logo.png" alt="Mr. Green Logo" class="logo" />
+      <div class="brand-text">
+        <h1>MR. GREEN</h1>
+        <p class="tagline">Curated Cannabis. Crafted Experience.</p>
+      </div>
     </div>
-    <nav class="main-nav">
-      <a href="#">หน้าแรก</a>
-      <a href="#catalog">สินค้า</a>
-      <a href="#about">ใบอนุญาต</a>
-      <a href="#contact">ติดต่อเรา</a>
-      <a href="#cart">ตะกร้า</a>
-    </nav>
+
+    <div class="header-actions">
+      <span id="channelHint" class="hint">Sending via LINE</span>
+      <button class="btn" id="langBtn" onclick="toggleLang()">🌏 Language</button>
+      <button id="cartBtn" class="cart-btn" aria-label="Open cart">
+        🛒 <span id="cartCount" class="badge">0</span>
+      </button>
+    </div>
   </header>
 
-  <section class="hero" aria-label="แนะนำร้าน">
-    <div class="hero-content">
-      <h1>ช่อดอกปักตะกล้า ดีไซน์หรู สีทอง-ดำ-เขียว</h1>
-      <p>สินค้าคุณภาพเยี่ยม พร้อมใบอนุญาตถูกต้องตามกฎหมาย</p>
-      <a href="#catalog" class="btn-primary">ดูสินค้า</a>
+  <!-- Catalog -->
+  <main class="container">
+    <h2 class="section-title">Premium Selection</h2>
+    <div id="productGrid" class="grid"></div>
+  </main>
+
+  <!-- Cart Drawer -->
+  <aside id="cartDrawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <h3>Cart</h3>
+      <button id="closeDrawer" class="icon-btn" aria-label="Close">✕</button>
     </div>
-  </section>
-
-  <section id="catalog" class="section">
-    <h2>สินค้ายอดนิยม</h2>
-    <div class="grid">
-      <!-- ตัวอย่างสินค้า -->
-      <div class="card">
-        <img src="images/wreath1.jpg" alt="ช่อดอกปักตะกล้า สีทอง" />
-        <h3>ช่อดอกปักตะกล้า สีทอง</h3>
-        <p>ชุดหรูหรา เหมาะสำหรับงานพิธี</p>
-        <span class="price">฿1,500</span>
-        <button class="btn" onclick="addToCart('ทอง-001')">หยิบใส่ตะกร้า</button>
+    <div id="cartItems" class="drawer-body"></div>
+    <div class="drawer-foot">
+      <div class="total">
+        <span>Total</span>
+        <strong id="cartTotal">฿0</strong>
       </div>
-      <div class="card">
-        <img src="images/wreath2.jpg" alt="ช่อดอกปักตะกล้า สีเขียว-ดำ" />
-        <h3>ช่อดอกปักตะกล้า สีเขียว-ดำ</h3>
-        <p>ดีไซน์เรียบหรู เข้ากับทุกงาน</p>
-        <span class="price">฿1,200</span>
-        <button class="btn" onclick="addToCart('เขียว-002')">หยิบใส่ตะกร้า</button>
-      </div>
-      <!-- เพิ่มสินค้าเพิ่มเติมได้ -->
+      <button class="primary" id="checkoutBtn" disabled>Checkout (Demo)</button>
+      <p class="note">* Demo only — no real payment is processed.</p>
     </div>
-  </section>
+  </aside>
 
-  <section id="about" class="section">
-    <h2>ใบอนุญาตและมาตรฐาน</h2>
-    <p>บริษัท Mister Green ได้รับใบอนุญาตจำหน่ายช่อดอกกัญชาตามกฎหมายที่เกี่ยวข้อง รูปแบบธุรกิจถูกต้อง ปลอดภัย และมีการเก็บหลักฐานการชำระเงินตามมาตรฐานความปลอดภัย</p>
-  </section>
+  <!-- Lightbox (image zoom) -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
+    <img id="lightboxImg" alt="Preview" />
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+  </div>
 
-  <section id="contact" class="section">
-    <h2>ติดต่อเรา</h2>
-    <form id="contactForm" onsubmit="return false;">
-      <input type="text" placeholder="ชื่อ" required />
-      <input type="email" placeholder="อีเมล" required />
-      <textarea placeholder="ข้อความ" required></textarea>
-      <button class="btn-primary" type="submit">ส่งข้อความ</button>
-    </form>
-  </section>
+  <!-- Success Modal -->
+  <div id="successModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <h3 id="successTitle">Order sent!</h3>
+      <p id="successBody">Thank you. We’ve received your message.</p>
+      <button class="primary" onclick="closeSuccess()">OK</button>
+    </div>
+  </div>
 
-  <footer class="site-footer">
-    <p>&copy; www.mistergreencannabisshop.com สงวนลิขสิทธิ์</p>
-  </footer>
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script src="main.js"></script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mr.Green Cannabis Shop</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <!-- ส่วนหัว -->
-  <header class="hero">
-    <img src="assets/images/mrgreen-logo.png" alt="Mr.Green Cannabis Shop Logo" class="logo">
-    <h1>Mr.Green Cannabis Shop</h1>
-    <p class="tagline">Curated Cannabis. Crafted Experience. Phuket | Premium Selection | Vinyl Vibes</p>
-  </header>
 
-  <!-- เนื้อหาหลัก -->
-  <main class="content">
-    <section>
-      <h2>Welcome to Mr.Green Cannabis Shop</h2>
-      <p>
-        Located in Rawai, Phuket — blending cannabis culture, art, and music.<br>
-        Explore premium strains, rolling papers, glass bongs, and chill vinyl vibes.
-      </p>
-    </section>
-  </main>
 
-  <!-- ส่วนท้าย -->
-  <footer>
-    <p>© 2025 Mr.Green Cannabis Shop — All Rights Reserved.</p>
-  </footer>
-</body>
-</html>
+Style.css
 
-<!-- PRODUCTS -->
-<section class="products container" id="menu">
-  <h2>Menu</h2>
-  <div id="product-grid" class="grid"></div>
-</section>
+
+:root{
+  --bg:#0e0f10; --card:#151718; --ink:#e8e5d5;
+  --muted:#a2a39b; --brand:#d2a64a; --accent:#28a46a;
+  --danger:#ff5a5a; --ring:#2b2f33;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,Segoe UI,Roboto,Arial}
+img{display:block;max-width:100%}
+
+/* Header */
+.site-header{
+  position:sticky;top:0;z-index:20;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px 18px;border-bottom:1px solid var(--ring);
+  background:rgba(14,15,16,.85);backdrop-filter: blur(6px);
+}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:54px;height:54px;border-radius:50%;object-fit:cover;box-shadow:0 0 18px rgba(210,166,74,.25)}
+.brand-text h1{margin:0;font-size:20px;letter-spacing:.12em}
+.tagline{margin:4px 0 0;color:var(--muted);font-size:12px}
+.header-actions{display:flex;gap:10px;align-items:center}
+.cart-btn{all:unset;cursor:pointer;background:#1d2022;border:1px solid var(--ring);padding:10px 12px;border-radius:12px}
+.badge{background:var(--brand);color:#141414;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:8px}
+.hint{color:var(--muted);font-size:12px;border:1px solid var(--ring);padding:4px 8px;border-radius:999px}
+.btn{cursor:pointer;border:1px solid var(--ring);background:#1b1e20;color:var(--ink);padding:8px 12px;border-radius:10px}
+
+/* Layout */
+.container{max-width:1100px;margin:28px auto;padding:0 16px}
+.section-title{font-size:22px;margin:0 0 14px;color:var(--brand)}
+
+/* Product Grid */
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--card);border:1px solid var(--ring);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 28px rgba(0,0,0,.25);transition:.2s ease}
+.card:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.card img{aspect-ratio:4/3;object-fit:cover;cursor:zoom-in}
+.card-body{padding:14px;display:grid;gap:10px}
+.title{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.title h3{margin:0;font-size:16px}
+.pill{font-size:12px;padding:3px 8px;border-radius:999px;border:1px solid var(--ring);color:var(--muted)}
+.meta{display:flex;gap:8px;color:var(--muted);font-size:13px}
+.price-stock{display:flex;justify-content:space-between;align-items:center}
+.price{font-weight:800;color:var(--brand)}
+.stock{font-size:13px;color:var(--muted)}
+.controls{display:flex;gap:8px}
+.qty{width:64px;padding:8px;border-radius:10px;border:1px solid var(--ring);background:#121314;color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:#1a7c51;color:#07150f;font-weight:800}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* Drawer / Cart */
+.drawer{
+  position:fixed;inset:0 0 0 auto;width:min(420px,90vw);
+  background:#101214;border-left:1px solid var(--ring);
+  transform:translateX(100%);transition:.25s ease;display:flex;flex-direction:column;z-index:40
+}
+.drawer.open{transform:none}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--ring)}
+.icon-btn{all:unset;cursor:pointer;font-size:18px;padding:6px 10px;border-radius:8px;background:#1b1f22}
+.drawer-body{padding:10px 12px;flex:1;overflow:auto;display:grid;gap:10px}
+.cart-row{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;border:1px solid var(--ring);border-radius:12px;background:#141618;padding:8px}
+.cart-row img{width:64px;height:64px;object-fit:cover;border-radius:10px}
+.drawer-foot{border-top:1px solid var(--ring);padding:12px;display:grid;gap:10px}
+.total{display:flex;justify-content:space-between;align-items:center}
+.primary{padding:12px;border-radius:12px;background:var(--brand);color:#141414;font-weight:800;border:0}
+.note{margin:0;color:var(--muted);font-size:12px;text-align:center}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60}
+.lightbox.show{display:flex}
+.lightbox-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+#lightboxImg{position:relative;max-width:92vw;max-height:88vh;border:1px solid var(--ring);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+.lightbox-close{position:absolute;top:16px;right:16px;all:unset;cursor:pointer;background:#1b1f22;border:1px solid var(--ring);color:var(--ink);padding:8px 10px;border-radius:10px}
+
+/* Success Modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:70}
+.modal.show{display:flex}
+.modal-card{background:#121416;border:1px solid var(--ring);border-radius:16px;padding:20px;max-width:420px;width:92vw;text-align:center}
+.modal-card h3{margin:0 0 6px;color:#e8dc9c}
+.modal-card p{color:#c2b678;margin:0 0 14px}
+
+/* Toast */
+.toast{
+  pointer-events:none;position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);
+  background:#111;border:1px solid var(--ring);color:var(--ink);padding:10px 14px;border-radius:10px;
+  opacity:0;transition:.25s ease;z-index:80
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Small screens */
+@media (max-width:480px){
+  .brand-text h1{font-size:18px}
+  .section-title{font-size:20px}
+}
