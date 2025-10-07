@@ -1,1 +1,13 @@
-mistergreencannabisshop.com
+Host/Name: www.mistergreencannabisshop.com
+Value/Points to: manonthemoon420.github.io
+TTL:3600
+A records 
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+AAAA records (IPv6)
+2606:50c0:8000::153
+2606:50c0:8001::153
+2606:50c0:8002::153
+2606:50c0:8003::153
