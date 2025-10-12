@@ -1,227 +1,226 @@
-/* =========
-   CONFIG
-========== */
-// ใส่หมายเลข/ID ที่จะคุยจริงตอนกด Checkout
-const LINE_ID = "https://line.me/ti/p/kcBcS1-8Dp"; // ตัวอย่าง: "@mrgreen"
-const WHATSAPP_NUMBER = "+66875658825"; // ต้องเป็นรูปแบบสากล ไม่มี 0 นำหน้า (66... สำหรับไทย)
+/* ---------------------------
+   Minimal “looks-like-shop” without payment
+----------------------------*/
 
-let sendChannel = "line"; // line | whatsapp
-
-/* =========
-   DATA
-========== */
 const products = [
-  { id:"p1", name:"Black Cherry Runtz", strain:"Indica", thc:28, price:300, stock:18, img:"assets/products/black-cherry-runtz.jpg" },
-  { id:"p2", name:"Strawberry Bule", strain:"Sativa", thc:30, price:400, stock:16, img:"assets/products/strawberry-bule.jpg" },
-  { id:"p3", name:"Super Boof", strain:"Sativa", thc:29, price:400, stock:20, img:"assets/products/super-boof.jpg" },
-  { id:"p4", name:"The Zoap", strain:"Sativa", thc:29, price:300, stock:14, img:"assets/products/the-zoap.jpg" },
-  { id:"p5", name:"Cookies N Cream", strain:"Sativa", thc:28, price:300, stock:11, img:"assets/products/cookies-n-cream.jpg" },
-  { id:"p6", name:"Lemon Diesel", strain:"Sativa", thc:30, price:400, stock:9, img:"assets/products/lemon-diesel.jpg" },
-  { id:"p7", name:"Special Queen", strain:"Sativa", thc:29, price:400, stock:13, img:"assets/products/special-queen.jpg" },
-  { id:"p8", name:"Sour Apple", strain:"Indica", thc:29, price:300, stock:13, img:"assets/products/sour-apple.jpg" },
-  { id:"p9", name:"Night Move", strain:"Indica", thc:29, price:400, stock:13, img:"assets/products/night-move.jpg" },
-  { id:"p10", name:"Big Ripper", strain:"Indica", thc:28, price:300, stock:13, img:"assets/products/big-ripper.jpg" },
+  {
+    id: 'king-shadow',
+    name: 'King Shadow',
+    notes: ['Relax', 'Creamy', 'Earthy'],
+    tag: 'relax'
+  },
+  {
+    id: 'ice-cream-cake',
+    name: 'Ice Cream Cake',
+    notes: ['Relax', 'Dessert', 'Smooth'],
+    tag: 'relax'
+  },
+  {
+    id: 'dark-knight',
+    name: 'Dark Knight',
+    notes: ['Sleep', 'Heavy', 'Piney'],
+    tag: 'sleep'
+  },
+  {
+    id: 'night-move',
+    name: 'Night Move',
+    notes: ['Sleep', 'Body Relief'],
+    tag: 'sleep'
+  },
+  {
+    id: 'sour-apple',
+    name: 'Sour Apple',
+    notes: ['Uplift', 'Crisp', 'Citrus'],
+    tag: 'uplift'
+  },
+  {
+    id: 'tiger-eye',
+    name: 'Tiger Eye',
+    notes: ['Focus', 'Herbal', 'Minty'],
+    tag: 'focus'
+  }
 ];
 
-/* =========
-   STATE
-========== */
-const cart = new Map(); // id -> { product, qty }
+const $grid = document.getElementById('productGrid');
+const $cartCount = document.getElementById('cartCount');
+const $cartDrawer = document.getElementById('cartDrawer');
+const $drawerBackdrop = document.getElementById('drawerBackdrop');
+const $openCartBtn = document.getElementById('openCartBtn');
+const $closeCartBtn = document.getElementById('closeCartBtn');
+const $cartItems = document.getElementById('cartItems');
+const $totalItems = document.getElementById('totalItems');
+const $waBtn = document.getElementById('waBtn');
+const $lineBtn = document.getElementById('lineBtn');
+const $year = document.getElementById('year');
 
-/* =========
-   DOM READY
-========== */
-document.addEventListener("DOMContentLoaded", () => {
-  renderProducts();
-  updateCartUI();
-  bindChannelButtons();
+document.addEventListener('DOMContentLoaded', () => {
+  $year.textContent = new Date().getFullYear();
+  renderProducts(products);
+  loadCart();
+  bindFilters();
 });
 
-/* =========
-   RENDERING
-========== */
-function renderProducts(){
-  const grid = document.getElementById("productGrid");
-  grid.innerHTML = products.map(p => {
-    const stockBadge = p.stock <= 0
-      ? `<span class="badge-out">หมด</span>`
-      : (p.stock <= 5 ? `<span class="badge-low">เหลือน้อย</span>` : `<span class="badge-ok">พร้อมส่ง</span>`);
-
-    return `
-    <article class="card">
-      <img src="${p.img}" alt="${p.name}" class="card-img" onclick="zoom('${p.img}')" />
+function renderProducts(list){
+  $grid.innerHTML = '';
+  list.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-media">✦</div>
       <div class="card-body">
         <h3 class="card-title">${p.name}</h3>
-        <p class="card-meta">${p.strain} • THC ${p.thc}%</p>
-
-        <div class="info">
-          <span>${stockBadge}</span>
-          <span>สต็อก: ${p.stock}</span>
+        <div class="badges">
+          ${p.notes.map(n => `<span class="badge-soft">${n}</span>`).join('')}
         </div>
-
-        <div class="card-buy">
-          <span class="price">฿${formatBaht(p.price)}</span>
-          <div class="qty">
-            <button class="icon-btn" onclick="chgQty('${p.id}',-1)">–</button>
-            <input id="qty-${p.id}" type="number" min="1" step="1" value="1" />
-            <button class="icon-btn" onclick="chgQty('${p.id}',1)">+</button>
-          </div>
-          <button class="btn" onclick="addToCart('${p.id}')">Add to Cart</button>
-        </div>
+        <button class="btn-add" data-id="${p.id}">เพิ่มรายการ</button>
       </div>
-    </article>`;
-  }).join("");
+    `;
+    $grid.appendChild(card);
+  });
+
+  // attach add handlers
+  $grid.querySelectorAll('.btn-add').forEach(btn => {
+    btn.addEventListener('click', () => addToCart(btn.dataset.id));
+  });
 }
 
-/* =========
-   CART
-========== */
-function chgQty(id,delta){
-  const el = document.getElementById(`qty-${id}`);
-  const v = Math.max(1, parseInt(el.value||"1",10) + delta);
-  el.value = v;
+/* ---------------------------
+   Filters (UI only)
+----------------------------*/
+function bindFilters(){
+  const chips = document.querySelectorAll('.chip');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.classList.remove('is-active'));
+    c.classList.add('is-active');
+    const tag = c.dataset.filter;
+    if(tag === 'all') renderProducts(products);
+    else renderProducts(products.filter(p => p.tag === tag));
+  }));
+}
+
+/* ---------------------------
+   Cart (no payment)
+----------------------------*/
+let cart = []; // [{id, name, qty}]
+
+function loadCart(){
+  try{
+    const raw = localStorage.getItem('mrgreen_cart');
+    cart = raw ? JSON.parse(raw) : [];
+  }catch(_e){ cart = []; }
+  updateCartUI();
+}
+
+function saveCart(){
+  localStorage.setItem('mrgreen_cart', JSON.stringify(cart));
 }
 
 function addToCart(id){
-  const product = products.find(p=>p.id===id);
-  if(!product) return;
-
-  const wanted = parseInt(document.getElementById(`qty-${id}`).value||"1",10);
-  if (product.stock <= 0) { toast("สินค้าหมด"); return; }
-  if (wanted > product.stock) { toast("เกินจำนวนสต็อก"); return; }
-
-  const current = cart.get(id)?.qty || 0;
-  const newQty = Math.min(product.stock, current + wanted);
-  cart.set(id, { product, qty:newQty });
-
+  const p = products.find(x => x.id === id);
+  if(!p) return;
+  const existing = cart.find(x => x.id === id);
+  if(existing) existing.qty += 1;
+  else cart.push({ id, name: p.name, qty: 1 });
+  saveCart();
   updateCartUI();
-  toast(`เพิ่ม ${product.name} x${wanted} แล้ว`);
+  openDrawer();
 }
 
 function removeFromCart(id){
-  cart.delete(id);
-  updateCartUI();
+  cart = cart.filter(x => x.id !== id);
+  saveCart(); updateCartUI();
 }
 
-function clearCart(){
-  cart.clear();
-  updateCartUI();
+function changeQty(id, delta){
+  const item = cart.find(x => x.id === id);
+  if(!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  saveCart(); updateCartUI();
 }
 
 function updateCartUI(){
-  // count
-  const count = Array.from(cart.values()).reduce((n, it)=>n+it.qty, 0);
-  document.getElementById("cartCount").textContent = count;
+  $cartCount.textContent = cart.reduce((s,x) => s + x.qty, 0);
+  $totalItems.textContent = $cartCount.textContent;
 
-  // list
-  const items = document.getElementById("cartItems");
-  if (cart.size===0){
-    items.innerHTML = `<p style="color:var(--muted);">ยังไม่มีสินค้าในตะกร้า</p>`;
-  } else {
-    items.innerHTML = Array.from(cart.values()).map(({product, qty}) => `
-      <div class="cart-row">
-        <img src="${product.img}" alt="${product.name}" />
-        <div class="grow">
-          <h4>${product.name}</h4>
-          <div class="meta">${product.strain} • THC ${product.thc}%</div>
-          <div class="meta">฿${formatBaht(product.price)} × ${qty}</div>
-        </div>
-        <div class="split">
-          <button class="icon-btn" onclick="decItem('${product.id}')">–</button>
-          <button class="icon-btn" onclick="incItem('${product.id}')">+</button>
-          <button class="icon-btn" onclick="removeFromCart('${product.id}')" aria-label="remove">🗑</button>
-        </div>
+  if(cart.length === 0){
+    $cartItems.innerHTML = `<p class="muted" style="padding:8px 4px">ยังไม่มีรายการ กด “เพิ่มรายการ” จากหน้าสินค้าได้เลย</p>`;
+    return;
+  }
+
+  $cartItems.innerHTML = cart.map(x => `
+    <div class="cart-item">
+      <div>
+        <div class="item-title">${x.name}</div>
+        <button class="remove-btn" data-id="${x.id}">ลบ</button>
       </div>
-    `).join("");
+      <div class="qty">
+        <button class="qty-btn" data-action="minus" data-id="${x.id}">−</button>
+        <div>${x.qty}</div>
+        <button class="qty-btn" data-action="plus" data-id="${x.id}">+</button>
+      </div>
+    </div>
+  `).join('');
+
+  // bind qty & remove
+  $cartItems.querySelectorAll('.qty-btn').forEach(b=>{
+    const id = b.dataset.id;
+    const action = b.dataset.action;
+    b.addEventListener('click', () => changeQty(id, action === 'plus' ? +1 : -1));
+  });
+  $cartItems.querySelectorAll('.remove-btn').forEach(b=>{
+    b.addEventListener('click', () => removeFromCart(b.dataset.id));
+  });
+}
+
+/* ---------------------------
+   Drawer controls
+----------------------------*/
+$openCartBtn.addEventListener('click', openDrawer);
+$closeCartBtn.addEventListener('click', closeDrawer);
+$drawerBackdrop.addEventListener('click', closeDrawer);
+
+function openDrawer(){ $cartDrawer.classList.add('open'); }
+function closeDrawer(){ $cartDrawer.classList.remove('open'); }
+
+/* ---------------------------
+   Chat-to-Order message
+----------------------------*/
+function buildOrderMessage(){
+  const ts = new Date().toLocaleString('th-TH');
+  const head = `สวัสดีครับ ผมต้องการสั่งซื้อจาก Mr.Green\nเวลาที่สั่ง: ${ts}\n\nรายการ:\n`;
+  const body = cart.length
+    ? cart.map((x,i)=>`${i+1}. ${x.name} × ${x.qty}`).join('\n')
+    : '(ยังไม่มีรายการในตะกร้า)';
+  const tail = `\n\nติดต่อกลับได้เลยครับ ขอบคุณครับ 🙏`;
+  return head + body + tail;
+}
+
+function encodeWhatsAppText(t){
+  return encodeURIComponent(t);
+}
+
+$waBtn.addEventListener('click', ()=>{
+  const msg = buildOrderMessage();
+  const link = `${window.APP_CONTACT.waLink}?text=${encodeWhatsAppText(msg)}`;
+  window.open(link, '_blank', 'noopener');
+});
+
+$lineBtn.addEventListener('click', async ()=>{
+  const msg = buildOrderMessage();
+
+  // 1) คัดลอกข้อความให้ (เพื่อให้แปะใน LINE ได้ทันที)
+  try{
+    await navigator.clipboard.writeText(msg);
+    document.getElementById('copyHint').textContent = 'คัดลอกรายการแล้ว ✔ วางข้อความในแชท LINE ได้เลย';
+  }catch(_e){
+    document.getElementById('copyHint').textContent = 'คัดลอกไม่สำเร็จ โปรดคัดลอกด้วยตนเองในหน้าถัดไป';
   }
 
-  // total
-  const total = Array.from(cart.values()).reduce((s, it)=>s + it.product.price*it.qty, 0);
-  document.getElementById("cartTotal").textContent = `฿${formatBaht(total)}`;
-  document.getElementById("checkoutBtn").disabled = cart.size===0;
-}
+  // 2) เปิดลิงก์ LINE ที่ให้มา
+  window.open(window.APP_CONTACT.lineLink, '_blank', 'noopener');
+});
 
-function incItem(id){
-  const entry = cart.get(id); if(!entry) return;
-  if (entry.qty < entry.product.stock) entry.qty++;
-  cart.set(id, entry);
-  updateCartUI();
-}
-function decItem(id){
-  const entry = cart.get(id); if(!entry) return;
-  entry.qty--;
-  if (entry.qty <= 0) cart.delete(id); else cart.set(id, entry);
-  updateCartUI();
-}
-
-/* =========
-   CHECKOUT → LINE / WA
-========== */
-function checkout(){
-  if (cart.size === 0) return;
-
-  const lines = [];
-  lines.push("🛒 สรุปรายการสั่งซื้อจากเว็บไซต์ MR. GREEN");
-  lines.push("— — —");
-  let total = 0;
-
-  cart.forEach(({product, qty})=>{
-    const line = `• ${product.name} x${qty} @฿${formatBaht(product.price)} = ฿${formatBaht(product.price*qty)}`;
-    lines.push(line);
-    total += product.price*qty;
-  });
-
-  lines.push("— — —");
-  lines.push(`ยอดรวม: ฿${formatBaht(total)}`);
-  lines.push("");
-  lines.push("ขอชื่อ/เบอร์ติดต่อ และที่อยู่จัดส่งด้วยครับ");
-
-  const msg = encodeURIComponent(lines.join("\n"));
-
-  if (sendChannel === "line"){
-    // เปิดแชท LINE (ถ้ามี LINE app จะพาเข้าแอป)
-    const url = `https://line.me/R/msg/text/?${msg}`;
-    window.open(url, "_blank");
-  } else {
-    // WhatsApp
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
-    window.open(url, "_blank");
-  }
-}
-
-/* =========
-   UI helpers
-========== */
-function toggleCart(open){
-  const el = document.getElementById("cartDrawer");
-  el.setAttribute("aria-hidden", open ? "false" : "true");
-}
-function zoom(src){
-  const box = document.getElementById("lightbox");
-  document.getElementById("lightboxImg").src = src;
-  box.setAttribute("aria-hidden","false");
-}
-function closeLightbox(){
-  document.getElementById("lightbox").setAttribute("aria-hidden","true");
-}
-function toast(text){
-  const t = document.getElementById("toast");
-  t.textContent = text;
-  t.classList.add("show");
-  setTimeout(()=> t.classList.remove("show"), 1800);
-}
-function formatBaht(n){ return n.toLocaleString("th-TH"); }
-
-function bindChannelButtons(){
-  const lb = document.getElementById("channelLabel");
-  document.getElementById("chooseLineBtn").addEventListener("click", ()=>{
-    sendChannel = "line";
-    lb.textContent = "LINE";
-    toast("จะส่งคำสั่งซื้อผ่าน LINE");
-  });
-  document.getElementById("chooseWhatsAppBtn").addEventListener("click", ()=>{
-    sendChannel = "whatsapp";
-    lb.textContent = "WhatsApp";
-    toast("จะส่งคำสั่งซื้อผ่าน WhatsApp");
-  });
-}
+/* Accessibility: Enter to open cart from header */
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'c' && (e.ctrlKey || e.metaKey)){ openDrawer(); }
+});
