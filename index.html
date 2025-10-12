@@ -1,86 +1,110 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mr.Green Cannabis Shop — Curated Cannabis. Crafted Experience.</title>
-  <meta name="theme-color" content="#0e0f10" />
+  <title>Mr.Green — Browse & Chat Order</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Shrikhand&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="หน้ารวมสินค้าแบบไม่มีระบบจ่ายเงิน เพิ่มรายการแล้วทักแชทเพื่อสั่งซื้อได้ทันที (LINE / WhatsApp)">
 </head>
 <body>
-  <!-- Header -->
+  <!-- Legal/Compliance Bar -->
+  <div class="legal-bar">
+    ✅ ไม่มีการชำระเงินออนไลน์ | เพิ่มรายการเพื่อบันทึกไว้ แล้วกด “ติดต่อเพื่อสั่งซื้อ” ผ่าน LINE / WhatsApp
+  </div>
+
+  <!-- Header / Hero -->
   <header class="site-header">
     <div class="brand">
-      <img src="assets/logo.png" alt="Mr. Green Logo" class="logo" />
+      <div class="brand-mark" aria-hidden="true">✦</div>
       <div class="brand-text">
-        <h1>MR. GREEN</h1>
-        <p class="tagline">Curated Cannabis. Crafted Experience.</p>
-        <p class="tagline">Call Mr.Green 087-565-8825 , +66875658825 </p>
-        <p class="tagline">Line ID : zaamanzaa </p>
-        <p class="tagline">WhatsApp : 0875658825 </p>
+        <h1 class="logo">Mr.Green</h1>
+        <p class="tagline">Curated Strains • Vinyl Vibes • Chat-to-Order</p>
       </div>
     </div>
 
     <div class="header-actions">
-      <span id="channelHint" class="hint">Sending via LINE</span>
-      <button class="btn" id="langBtn" onclick="toggleLang()">🌏 Language</button>
-      <button id="cartBtn" class="cart-btn" aria-label="Open cart">
-        🛒 <span id="cartCount" class="badge">0</span>
+      <button id="openCartBtn" class="btn btn-ghost">
+        รายการของฉัน <span id="cartCount" class="badge">0</span>
       </button>
     </div>
   </header>
 
-  <!-- Catalog -->
+  <!-- Subnav / Filters (optional—UI only) -->
+  <section class="subnav">
+    <div class="filters">
+      <button class="chip is-active" data-filter="all">ทั้งหมด</button>
+      <button class="chip" data-filter="relax">Relax</button>
+      <button class="chip" data-filter="sleep">Sleep</button>
+      <button class="chip" data-filter="uplift">Uplift</button>
+      <button class="chip" data-filter="focus">Focus</button>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
   <main class="container">
-    <h2 class="section-title">Premium Selection</h2>
     <div id="productGrid" class="grid"></div>
   </main>
 
-  <!-- Cart Drawer -->
-  <aside id="cartDrawer" class="drawer" aria-hidden="true">
-    <div class="drawer-head">
-      <h3>Cart</h3>
-      <button id="closeDrawer" class="icon-btn" aria-label="Close">✕</button>
-    </div>
-    <div id="cartItems" class="drawer-body"></div>
-    <div class="drawer-foot">
-      <div class="total">
-        <span>Total</span>
-        <strong id="cartTotal">฿0</strong>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-title">ติดต่อร้าน</div>
+        <ul class="contact-list">
+          <li>LINE ID: <strong>zaamanzaa</strong></li>
+          <li><a class="link" href="https://line.me/ti/p/kcBcS1-8Dp" target="_blank" rel="noopener">เปิดแชท LINE</a></li>
+          <li>WhatsApp: <strong>+66875658825</strong></li>
+          <li><a class="link" href="https://wa.me/66875658825" target="_blank" rel="noopener">เปิดแชท WhatsApp</a></li>
+        </ul>
       </div>
-      <button class="primary" id="checkoutBtn" disabled>Checkout (Demo)</button>
-      <p class="note">* Demo only — no real payment is processed.</p>
+      <div>
+        <div class="footer-title">นโยบาย</div>
+        <p class="muted">
+          เว็บไซต์นี้มีไว้เพื่อแสดงสินค้าและให้ลูกค้าติดต่อเพื่อสั่งซื้อเท่านั้น ไม่มีระบบรับชำระเงินออนไลน์
+          การซื้อขายเป็นไปตามกฎหมายไทยที่บังคับใช้ในปัจจุบัน
+        </p>
+      </div>
     </div>
+    <div class="copyright">© <span id="year"></span> Mr.Green — Rawai, Phuket</div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <aside id="cartDrawer" class="drawer">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <h2>รายการของฉัน</h2>
+        <button id="closeCartBtn" class="icon-btn" aria-label="ปิด">✕</button>
+      </div>
+
+      <div id="cartItems" class="drawer-body"></div>
+
+      <div class="drawer-footer">
+        <div class="summary">
+          <div>จำนวนรายการทั้งหมด: <strong id="totalItems">0</strong></div>
+          <!-- ไม่มียอดชำระ / ไม่แสดงราคา -->
+        </div>
+
+        <div class="contact-actions">
+          <button id="waBtn" class="btn btn-primary">ติดต่อเพื่อสั่งซื้อ (WhatsApp)</button>
+          <button id="lineBtn" class="btn btn-line">ติดต่อเพื่อสั่งซื้อ (LINE)</button>
+          <div id="copyHint" class="copy-hint">* ระบบจะคัดลอกข้อความรายการให้โดยอัตโนมัติสำหรับ LINE</div>
+        </div>
+      </div>
+    </div>
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
   </aside>
 
-  <!-- Lightbox (image zoom) -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
-    <img id="lightboxImg" alt="Preview" />
-    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
-  </div>
-
-  <!-- Success Modal -->
-  <div id="successModal" class="modal" aria-hidden="true">
-    <div class="modal-card">
-      <h3 id="successTitle">Order sent!</h3>
-      <p id="successBody">Thank you. We’ve received your message.</p>
-      <button class="primary" onclick="closeSuccess()">OK</button>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
+  <script>
+    window.APP_CONTACT = {
+      lineId: 'zaamanzaa',
+      lineLink: 'https://line.me/ti/p/kcBcS1-8Dp',
+      waPhone: '+66875658825',
+      waLink: 'https://wa.me/66875658825'
+    };
+  </script>
   <script src="main.js"></script>
 </body>
 </html>
-<link rel="icon" href="assets/logo/favicon.png">
-<header class="topbar">
-  <img src="assets/logo/logo.png" alt="Mr. Green Cannabis Shop" class="logo">
-  ...
-</header>
-
-<main id="catalog" class="grid"></main>
-
-<script src="main.js"></script>
