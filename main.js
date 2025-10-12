@@ -7,37 +7,97 @@ const products = [
     id: 'king-shadow',
     name: 'King Shadow',
     notes: ['Relax', 'Creamy', 'Earthy'],
-    tag: 'relax'
+    tag: 'relax',
+    thc: '30%', // เพิ่ม: ระดับ THC
+    flavor: 'Creamy Earthy Sweet' // เพิ่ม: กลิ่น/รสชาติ
   },
   {
     id: 'ice-cream-cake',
     name: 'Ice Cream Cake',
     notes: ['Relax', 'Dessert', 'Smooth'],
-    tag: 'relax'
+    tag: 'relax',
+    thc: '29%',
+    flavor: 'Vanilla Dessert Sweet'
   },
   {
     id: 'dark-knight',
     name: 'Dark Knight',
     notes: ['Sleep', 'Heavy', 'Piney'],
-    tag: 'sleep'
+    tag: 'sleep',
+    thc: '28%',
+    flavor: 'Pine Earthy Gassy'
   },
   {
     id: 'night-move',
     name: 'Night Move',
     notes: ['Sleep', 'Body Relief'],
-    tag: 'sleep'
+    tag: 'sleep',
+    thc: '29%',
+    flavor: 'Woody Earthy Herbal'
   },
   {
     id: 'sour-apple',
     name: 'Sour Apple',
     notes: ['Uplift', 'Crisp', 'Citrus'],
-    tag: 'uplift'
+    tag: 'uplift',
+    thc: '28%',
+    flavor: 'Citrus Apple Tangy'
   },
+  {
+    id: 'Strawberry Bule',
+    name: 'Strawberry Bule',
+    notes: ['Focus', 'Herbal', 'Minty'],
+    tag: 'focus',
+    thc: '21%',
+    flavor: 'Berry Fruity Fresh'
+  }
+     {
+    id: 'Lemon Diesel',
+    name: 'Lemon Diesel',
+    notes: ['Focus', 'Herbal', 'Minty'],
+    tag: 'focus',
+    thc: '21%',
+    flavor: 'Minty Herbal Fresh'
+  }
   {
     id: 'tiger-eye',
     name: 'Tiger Eye',
     notes: ['Focus', 'Herbal', 'Minty'],
-    tag: 'focus'
+    tag: 'focus',
+    thc: '21%',
+    flavor: 'Minty Herbal Fresh'
+  }
+  {
+    id: 'tiger-eye',
+    name: 'Tiger Eye',
+    notes: ['Focus', 'Herbal', 'Minty'],
+    tag: 'focus',
+    thc: '21%',
+    flavor: 'Minty Herbal Fresh'
+  }
+  {
+    id: 'tiger-eye',
+    name: 'Tiger Eye',
+    notes: ['Focus', 'Herbal', 'Minty'],
+    tag: 'focus',
+    thc: '21%',
+    flavor: 'Minty Herbal Fresh'
+  }
+  {
+    id: 'tiger-eye',
+    name: 'Tiger Eye',
+    notes: ['Focus', 'Herbal', 'Minty'],
+    tag: 'focus',
+    thc: '21%',
+    flavor: 'Minty Herbal Fresh'
+  }
+  {
+    id: 'tiger-eye',
+    name: 'Tiger Eye',
+    notes: ['Focus', 'Herbal', 'Minty'],
+    tag: 'focus',
+    thc: '21%',
+    flavor: 'Minty Herbal Fresh'
   }
 ];
 
