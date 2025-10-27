@@ -1,72 +1,201 @@
 /* ---------------------------
    Minimal “looks-like-shop” without payment
 ----------------------------*/
-
 const products = [
+  // --- EXISTING PRODUCTS (with updated ID for consistency) ---
   {
-    id: 'King-Shadow',
+    id: 'king-shadow',
     name: 'King Shadow',
     notes: ['Relax', 'Creamy', 'Earthy'],
     tag: 'relax',
-    thc: '30%', // เพิ่ม: ระดับ THC
-    flavor: 'Creamy Earthy Sweet' // เพิ่ม: กลิ่น/รสชาติ
+    thc: '30%',
+    flavor: 'Creamy Earthy Sweet'
   },
   {
-    id: 'Ice-Cream-Cake',
+    id: 'ice-cream-cake-old', // เปลี่ยน ID เพื่อหลีกเลี่ยงการซ้ำกับรายการใหม่
     name: 'Ice Cream Cake',
     notes: ['Relax', 'Dessert', 'Smooth'],
     tag: 'relax',
     thc: '29%',
     flavor: 'Vanilla Dessert Sweet'
   },
+  // --- NEW PRODUCTS BASED ON YOUR LIST ---
   {
-    id: 'Dark-Knight',
-    name: 'Dark Knight',
-    notes: ['Sleep', 'Heavy', 'Piney'],
-    tag: 'sleep',
-    thc: '28%',
-    flavor: 'Pine Earthy Gassy'
+    id: 'special-queen',
+    name: 'Special Queen',
+    notes: ['Balanced', 'Clear-headed', 'Uplifting'],
+    tag: 'uplift',
+    thc: '22%', 
+    flavor: 'Herbal, earthy, floral'
   },
   {
-    id: 'Night-Move',
-    name: 'Night Move',
-    notes: ['Sleep', 'Body Relief'],
+    id: 'big-ripper',
+    name: 'Big Ripper',
+    notes: ['Energizing', 'Refreshing', 'Focused'],
+    tag: 'uplift',
+    thc: '25%',
+    flavor: 'Citrus, gassy, herbal'
+  },
+  {
+    id: 'kaysu-bubba-kush',
+    name: 'Kaysu Bubba Kush',
+    notes: ['Heavy', 'Deeply Relaxing', 'Sleepy'],
     tag: 'sleep',
     thc: '29%',
-    flavor: 'Woody Earthy Herbal'
+    flavor: 'Earthy, coffee, dried floral'
   },
   {
-    id: 'Sour-Apple',
-    name: 'Sour Apple',
-    notes: ['Uplift', 'Crisp', 'Citrus'],
+    id: 'blazed-muay-thai',
+    name: 'Blazed Muay Thai',
+    notes: ['Active', 'Fun', 'Full of Energy'],
     tag: 'uplift',
-    thc: '28%',
-    flavor: 'Citrus Apple Tangy'
+    thc: '24%',
+    flavor: 'Herbal, spicy, citrus fruit'
   },
   {
-    id: 'Strawberry-Bule',
-    name: 'Strawberry Bule',
-    notes: ['Focus', 'Herbal', 'Minty'],
+    id: 'alien-mint',
+    name: 'Alien Mint',
+    notes: ['Clear Mind', 'Refreshing', 'Stress Relief'],
     tag: 'focus',
-    thc: '21%',
-    flavor: 'Berry Fruity Fresh'
+    thc: '26%',
+    flavor: 'Cool mint, sweet herbal'
   },
-     {
-    id: 'Lemon-Diesel',
+  {
+    id: 'black-out-cherry',
+    name: 'Black Out Cherry',
+    notes: ['Heavy', 'Deep Calm', 'Good for Sleep'],
+    tag: 'sleep',
+    thc: '30%',
+    flavor: 'Dark cherry, earthy, floral'
+  },
+  {
+    id: 'cookies-n-cream',
+    name: 'Cookies n Cream',
+    notes: ['Light High', 'Happy', 'Clear Mind'],
+    tag: 'focus',
+    thc: '23%',
+    flavor: 'Cookie, cream, vanilla'
+  },
+  {
+    id: 'lemon-diesel',
     name: 'Lemon Diesel',
-    notes: ['Focus', 'Herbal', 'Minty'],
+    notes: ['Energetic', 'Focused', 'Cheerful'],
     tag: 'focus',
-    thc: '21%',
-    flavor: 'Minty Herbal Fresh'
+    thc: '25%',
+    flavor: 'Lemon, gas, herbal'
   },
   {
-    id: 'Special-Queen',
-    name: 'Special Queen',
-    notes: ['Focus', 'Herbal', 'Minty'],
-    tag: 'fo',
-    thc: '21%',
-    flavor: 'Minty Herbal Fresh'
+    id: 'dark-knight',
+    name: 'Dark Knight',
+    notes: ['Heavy Body', 'Calm Mind', 'Sleepy'],
+    tag: 'sleep',
+    thc: '28%',
+    flavor: 'Berry, chocolate, earthy'
   },
+  {
+    id: 'blank-check',
+    name: 'Blank Check',
+    notes: ['Balanced', 'Mellow', 'Relaxed'],
+    tag: 'relax',
+    thc: '27%',
+    flavor: 'Creamy, fruity, gassy'
+  },
+  {
+    id: 'night-move',
+    name: 'Night Move',
+    notes: ['Calm', 'Heavy Body', 'Good Sleep'],
+    tag: 'sleep',
+    thc: '29%',
+    flavor: 'Deep berry, chocolate, pine'
+  },
+  {
+    id: 'oreo-stomper',
+    name: 'Oreo Stomper',
+    notes: ['Relaxed', 'Smooth', 'Mellow'],
+    tag: 'relax',
+    thc: '26%',
+    flavor: 'Cookie, cream, grape'
+  },
+  {
+    id: 'mochi-gelato',
+    name: 'Mochi Gelato',
+    notes: ['Smooth High', 'Happy', 'Light Mind'],
+    tag: 'uplift',
+    thc: '24%',
+    flavor: 'Creamy, fruity, floral'
+  },
+  {
+    id: 'sub-zero',
+    name: 'Sub Zero',
+    notes: ['Cooling', 'Clear-headed', 'Fresh'],
+    tag: 'focus',
+    thc: '23%',
+    flavor: 'Mint, menthol, floral'
+  },
+  {
+    id: 'super-boof',
+    name: 'Super Boof',
+    notes: ['Euphoric', 'Bright', 'Relaxing'],
+    tag: 'relax',
+    thc: '27%',
+    flavor: 'Sweet fruit, cream, gas'
+  },
+  {
+    id: 'bolo-runtz',
+    name: 'Bolo Runtz',
+    notes: ['Happy', 'Playful', 'Light High'],
+    tag: 'uplift',
+    thc: '24%',
+    flavor: 'Candy, fruity, creamy'
+  },
+  {
+    id: 'watermelon-zkittlez',
+    name: 'Watermelon Zkittlez',
+    notes: ['Relaxed', 'Fresh', 'Uplifting'],
+    tag: 'relax',
+    thc: '26%',
+    flavor: 'Watermelon, candy, mixed fruit'
+  },
+  {
+    id: 'zoap',
+    name: 'Zoap',
+    notes: ['Balanced', 'Clear-headed', 'Relaxed'],
+    tag: 'relax',
+    thc: '25%',
+    flavor: 'Floral, fruity, soapy sweet'
+  },
+  {
+    id: 'colombian-gold',
+    name: 'Colombian Gold',
+    notes: ['Energetic', 'Happy', 'Focused'],
+    tag: 'uplift',
+    thc: '22%',
+    flavor: 'Earthy wood, herbal, dried floral'
+  },
+  {
+    id: 'ice-cream-cake', // รายการ Ice Cream Cake ใหม่
+    name: 'Ice Cream Cake',
+    notes: ['Relaxed', 'Calm', 'Sleepy'],
+    tag: 'sleep',
+    thc: '28%',
+    flavor: 'Sweet cream, vanilla'
+  },
+  {
+    id: 'sour-apple',
+    name: 'Sour Apple',
+    notes: ['Refreshing', 'Energetic', 'Cheerful'],
+    tag: 'uplift',
+    thc: '24%',
+    flavor: 'Sour apple, gas, sweet'
+  },
+  {
+    id: 'bangkok-og',
+    name: 'Bangkok OG',
+    notes: ['Heavy Head', 'Deep Relaxation', 'Sleepy'],
+    tag: 'sleep',
+    thc: '31%',
+    flavor: 'Earthy, pine, light citrus'
+  }
 ];
 
 const $grid = document.getElementById('productGrid');
