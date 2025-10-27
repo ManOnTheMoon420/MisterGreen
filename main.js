@@ -226,6 +226,11 @@ function renderProducts(list){
       <div class="card-media">✦</div>
       <div class="card-body">
         <h3 class="card-title">${p.name}</h3>
+        
+        <div class="product-details">
+          <p><strong>THC:</strong> ${p.thc}</p>
+          <p><strong>Flavor:</strong> ${p.flavor}</p>
+        </div>
         <div class="badges">
           ${p.notes.map(n => `<span class="badge-soft">${n}</span>`).join('')}
         </div>
@@ -240,7 +245,6 @@ function renderProducts(list){
     btn.addEventListener('click', () => addToCart(btn.dataset.id));
   });
 }
-
 /* ---------------------------
    Filters (UI only)
 ----------------------------*/
