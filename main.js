@@ -169,7 +169,7 @@ const products = [
     tag: 'uplift',
     thc: '24%',
     flavor: 'Candy, fruity, creamy',
-    image: BASE_IMAGE_URL + 'bolo-runtz.png' // ⭐ https://raw.githubusercontent.com//ManOnTheMoon420/MisterGreen/main/images/bolo-runtz.png
+    image: BASE_IMAGE_URL + 'https://github.com/ManOnTheMoon420/MisterGreen/blob/main/images/bolo-runtz.png' // ⭐ https://raw.githubusercontent.com//ManOnTheMoon420/MisterGreen/main/images/bolo-runtz.png
   },
   {
     id: 'watermelon-zkittlez',
