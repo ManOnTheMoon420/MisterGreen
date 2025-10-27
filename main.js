@@ -4,7 +4,7 @@
 
 // ⭐ หมายเหตุ: โปรดแทนที่ [YOUR_GITHUB_RAW_URL] ด้วย URL จริงของคุณ
 // เช่น: https://raw.githubusercontent.com/username/repo-name/branch-name
-const BASE_IMAGE_URL = "https://github.com/ManOnTheMoon420/MisterGreen/tree/main/images"; 
+const BASE_IMAGE_URL = "https://raw.githubusercontent.com/ManOnTheMoon420/MisterGreen/main/images/";
 
 const products = [
   // --- EXISTING PRODUCTS (with 'image' field added) ---
