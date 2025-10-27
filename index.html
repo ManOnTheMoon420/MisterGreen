@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mr.Green — Browse & Chat Order</title>
+    <title>Mr.Green — Curated Strains & Chat Order</title>
     <!-- Fonts for the design -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Shrikhand&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
             --stroke: rgba(255,255,255,0.12);
             --text:#e8fffb;
             --muted:#b9e7dd;
-            --accent: var(--green-500); /* ใช้สีเขียวหลัก */
+            --accent: var(--green-500);
             --accent-light: var(--lime-300);
             --shadow: 0 10px 30px rgba(0,0,0,.35);
             --radius: 18px;
@@ -56,7 +56,6 @@
             display:flex;align-items:center;justify-content:space-between;
             padding: clamp(16px, 3vw, 28px);
             border-bottom:1px solid var(--stroke);
-            /* Background adapted for Mr.Green theme */
             background: radial-gradient(1200px 400px at 10% -10%, rgba(31,163,106,.2), transparent),
                         radial-gradient(800px 300px at 90% -20%, rgba(184,241,113,.2), transparent);
             position:sticky;top:0;backdrop-filter: blur(10px);z-index:20;
@@ -70,8 +69,6 @@
             box-shadow: var(--shadow);
             font-size:26px;transform: rotate(-8deg);
         }
-        
-        /* สไตล์สำหรับรูปภาพโลโก้ */
         .brand-mark img {
             max-width: 75%; 
             max-height: 75%;
@@ -82,7 +79,6 @@
             margin:0;font-size: clamp(26px, 3.5vw, 40px);
             font-family: 'Shrikhand', cursive;
             letter-spacing:.5px;
-            /* Text gradient matching theme */
             background: linear-gradient(180deg, #f0fff0, var(--lime-300));
             -webkit-background-clip:text;background-clip:text;color:transparent;
             text-shadow: 0 2px 18px rgba(184,241,113,.15);
@@ -134,26 +130,44 @@
         .card:hover{transform: translateY(-4px);}
         .card-media{
             height:160px;
-            background:
-                radial-gradient(500px 180px at 30% 0%, rgba(31,163,106,.25), transparent),
-                radial-gradient(500px 220px at 80% -20%, rgba(184,241,113,.28), transparent),
-                linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-            
             display:flex;
             justify-content:center;
             align-items:center; 
             overflow:hidden; 
-            color:#cffff1;font-size:40px
+            background: #0d1321; /* Dark background for media */
         }
 
         .card-media img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Use cover for product image placeholders */
+            object-fit: cover; /* Ensures the image fills the container */
+            transition: transform 0.3s ease;
+        }
+
+        .card-media img:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
         }
 
         .card-body{padding:16px}
         .card-title{margin:0 0 6px;font-size:1.2rem;font-weight:700; color: var(--accent-light);}
+        
+        /* New Styling for Product Details (THC/Flavor) */
+        .product-details {
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        .product-details p {
+            margin: 4px 0;
+            line-height: 1.2;
+        }
+        .product-details strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
         .badges{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
         .badge-soft{
             font-size:.8rem;padding:.25rem .55rem;border-radius:999px;
@@ -216,10 +230,10 @@
         .icon-btn{background:transparent;border:1px solid var(--stroke);color:var(--text);border-radius:10px;padding:.4rem .7rem;cursor:pointer}
         .drawer-body{padding:10px 12px;flex:1;overflow-y:auto}
         .cart-item{
-            display:grid;grid-template-columns: 1fr auto;gap:10px;align-items:center;
+            display:flex;justify-content:space-between;align-items:center;
             border:1px solid var(--stroke);background:var(--card);border-radius:12px;padding:10px 12px;margin-bottom:10px
         }
-        .item-title{font-weight:700; color: var(--accent-light);}
+        .item-title{font-weight:700; color: var(--accent-light); margin-bottom: 5px;}
         .qty{display:flex;align-items:center;gap:8px}
         .qty-btn{
             width:28px;height:28px;border-radius:8px;border:1px solid var(--stroke);background:var(--card-2);color:var(--text);cursor:pointer;
@@ -227,14 +241,14 @@
         }
         .qty-btn:hover { background-color: rgba(255, 255, 255, 0.2); }
         .remove-btn{
-            border:0;background:transparent;color:#ffb3b3;cursor:pointer
+            border:0;background:transparent;color:#ffb3b3;cursor:pointer; font-size: 0.85rem; padding: 0; margin-top: 2px;
         }
         .drawer-footer{padding:14px 16px;border-top:1px solid var(--stroke)}
         .summary{margin-bottom:12px; font-size: 1.1rem; text-align: center;}
         .contact-actions{display:grid;gap:10px}
-        .btn-primary{background: linear-gradient(180deg, #25D366, #128C7E);color:white; font-size: 1.05rem; transition: transform 0.2s;} /* WhatsApp Green */
+        .btn-primary{background: linear-gradient(180deg, #25D366, #128C7E);color:white; font-size: 1.05rem; transition: transform 0.2s;}
         .btn-primary:hover { transform: translateY(-1px); }
-        .btn-line{background: linear-gradient(180deg, #00C300, #00B900);color:white; font-size: 1.05rem; transition: transform 0.2s;} /* LINE Green */
+        .btn-line{background: linear-gradient(180deg, #00C300, #00B900);color:white; font-size: 1.05rem; transition: transform 0.2s;}
         .btn-line:hover { transform: translateY(-1px); }
         .copy-hint{font-size:.85rem;color:var(--muted);opacity:.9;text-align:center; padding: 5px 0 0 0;}
     </style>
@@ -249,8 +263,7 @@
     <header class="site-header">
         <div class="brand">
             <div class="brand-mark" aria-hidden="true">
-                <!-- ⭐⭐⭐ รูปภาพโลโก้ Mr.Green ⭐⭐⭐ -->
-                <!-- แทนที่ URL ด้านล่างด้วยโลโก้จริงของคุณ -->
+                <!-- Placeholder for Logo Image (Replace URL with your hosted logo) -->
                 <img src="https://placehold.co/52x52/1fa36a/0f3d2e?text=G" alt="Mr. Green Logo" onerror="this.onerror=null;this.src='https://placehold.co/52x52/1fa36a/0f3d2e?text=G'" />
             </div>
             <div class="brand-text">
@@ -266,7 +279,7 @@
         </div>
     </header>
 
-    <!-- Subnav / Filters (optional—UI only) -->
+    <!-- Subnav / Filters -->
     <section class="subnav">
         <div class="filters">
             <button class="chip is-active" data-filter="all">ทั้งหมด</button>
@@ -334,217 +347,463 @@
 
     <script>
         // Global contact info
-        const APP_CONTACT = {
+        window.APP_CONTACT = {
             lineId: 'zaamanzaa',
             lineLink: 'https://line.me/ti/p/kcBcS1-8Dp',
             waPhone: '66875658825', // ต้องเป็นตัวเลขเท่านั้นสำหรับ URL
             waLink: 'https://wa.me/66875658825'
         };
+        
+        // ⭐ หมายเหตุ: โปรดแทนที่ [YOUR_GITHUB_RAW_URL] ด้วย URL จริงของคุณ
+        const BASE_IMAGE_URL = "https://raw.githubusercontent.com/ManOnTheMoon420/MisterGreen/main/images/";
 
-        // Data for demonstration
         const products = [
-            { id: 1, name: 'Sativa Dream', description: 'พลังงานสูงและสมาธิดี เหมาะสำหรับกิจกรรมยามวัน', categories: ['uplift', 'focus'], imageUrl: 'https://placehold.co/250x160/1fa36a/0f3d2e?text=SATIVA' },
-            { id: 2, name: 'Indica Night', description: 'ผ่อนคลายลึกและช่วยให้หลับสบายยิ่งขึ้น', categories: ['relax', 'sleep'], imageUrl: 'https://placehold.co/250x160/0f3d2e/1fa36a?text=INDICA' },
-            { id: 3, name: 'Hybrid Chill', description: 'สมดุลระหว่างความผ่อนคลายและการยกระดับอารมณ์', categories: ['relax', 'uplift'], imageUrl: 'https://placehold.co/250x160/156b4e/b8f171?text=HYBRID' },
-            { id: 4, name: 'Creative Fuel', description: 'กระตุ้นความคิดสร้างสรรค์และโฟกัส', categories: ['focus', 'uplift'], imageUrl: 'https://placehold.co/250x160/b8f171/052a2a?text=FOCUS' },
-            { id: 5, name: 'Deep Relaxation', description: 'ช่วยบรรเทาความตึงเครียดของร่างกาย', categories: ['relax', 'sleep'], imageUrl: 'https://placehold.co/250x160/137a7f/e8fffb?text=SLEEP' },
+            {
+                id: 'cookies-n-cream',
+                name: 'Cookies n Cream',
+                notes: ['Light High', 'Happy', 'Clear Mind'],
+                tag: 'focus',
+                thc: '23%',
+                flavor: 'Cookie, cream, vanilla',
+                image: BASE_IMAGE_URL + 'cookies-n-cream.jpg'
+            },
+            {
+                id: 'lemon-diesel',
+                name: 'Lemon Diesel',
+                notes: ['Energetic', 'Focused', 'Cheerful'],
+                tag: 'uplift',
+                thc: '25%',
+                flavor: 'Lemon, gas, herbal',
+                image: BASE_IMAGE_URL + 'lemon-diesel.png'
+            },
+            {
+                id: 'mochi-gelato',
+                name: 'Mochi Gelato',
+                notes: ['Smooth High', 'Happy', 'Light Mind'],
+                tag: 'uplift',
+                thc: '24%',
+                flavor: 'Creamy, fruity, floral',
+                image: BASE_IMAGE_URL + 'mochi-gelato.png'
+            },
+            {
+                id: 'sub-zero',
+                name: 'Sub Zero',
+                notes: ['Cooling', 'Clear-headed', 'Fresh'],
+                tag: 'focus',
+                thc: '23%',
+                flavor: 'Mint, menthol, floral',
+                image: BASE_IMAGE_URL + 'sub-zero.png'
+            },
+            {
+                id: 'super-boof',
+                name: 'Super Boof',
+                notes: ['Euphoric', 'Bright', 'Relaxing'],
+                tag: 'relax',
+                thc: '27%',
+                flavor: 'Sweet fruit, cream, gas',
+                image: BASE_IMAGE_URL + 'super-boof.png'
+            },
+            {
+                id: 'bolo-runtz',
+                name: 'Bolo Runtz',
+                notes: ['Happy', 'Playful', 'Light High'],
+                tag: 'uplift',
+                thc: '24%',
+                flavor: 'Candy, fruity, creamy',
+                image: BASE_IMAGE_URL + 'bolo-runtz.png'
+            },
+            {
+                id: 'zoap',
+                name: 'Zoap',
+                notes: ['Balanced', 'Clear-headed', 'Relaxed'],
+                tag: 'relax',
+                thc: '25%',
+                flavor: 'Floral, fruity, soapy sweet',
+                image: BASE_IMAGE_URL + 'zoap.png'
+            },
+            {
+                id: 'sour-apple',
+                name: 'Sour Apple',
+                notes: ['Refreshing', 'Energetic', 'Cheerful'],
+                tag: 'uplift',
+                thc: '24%',
+                flavor: 'Sour apple, gas, sweet',
+                image: BASE_IMAGE_URL + 'sour-apple.png'
+            },
+            {
+                id: 'king-shadow',
+                name: 'King Shadow',
+                notes: ['Relax', 'Creamy', 'Earthy'],
+                tag: 'relax',
+                thc: '30%',
+                flavor: 'Creamy Earthy Sweet',
+                image: BASE_IMAGE_URL + 'king-shadow.jpg'
+            },
+            {
+                id: 'ice-cream-cake-old',
+                name: 'Ice Cream Cake (Old)',
+                notes: ['Relax', 'Dessert', 'Smooth'],
+                tag: 'relax',
+                thc: '29%',
+                flavor: 'Vanilla Dessert Sweet',
+                image: BASE_IMAGE_URL + 'ice-cream-cake-old.jpg'
+            },
+            {
+                id: 'special-queen',
+                name: 'Special Queen',
+                notes: ['Balanced', 'Clear-headed', 'Uplifting'],
+                tag: 'uplift',
+                thc: '22%', 
+                flavor: 'Herbal, earthy, floral',
+                image: BASE_IMAGE_URL + 'special-queen.jpg'
+            },
+            {
+                id: 'big-ripper',
+                name: 'Big Ripper',
+                notes: ['Energizing', 'Refreshing', 'Focused'],
+                tag: 'uplift',
+                thc: '25%',
+                flavor: 'Citrus, gassy, herbal',
+                image: BASE_IMAGE_URL + 'big-ripper.jpg'
+            },
+            {
+                id: 'kaysu-bubba-kush',
+                name: 'Kaysu Bubba Kush',
+                notes: ['Heavy', 'Deeply Relaxing', 'Sleepy'],
+                tag: 'sleep',
+                thc: '29%',
+                flavor: 'Earthy, coffee, dried floral',
+                image: BASE_IMAGE_URL + 'kaysu-bubba-kush.jpg'
+            },
+            {
+                id: 'blazed-muay-thai',
+                name: 'Blazed Muay Thai',
+                notes: ['Active', 'Fun', 'Full of Energy'],
+                tag: 'uplift',
+                thc: '24%',
+                flavor: 'Herbal, spicy, citrus fruit',
+                image: BASE_IMAGE_URL + 'blazed-muay-thai.jpg'
+            },
+            {
+                id: 'alien-mint',
+                name: 'Alien Mint',
+                notes: ['Clear Mind', 'Refreshing', 'Stress Relief'],
+                tag: 'focus',
+                thc: '26%',
+                flavor: 'Cool mint, sweet herbal',
+                image: BASE_IMAGE_URL + 'alien-mint.jpg'
+            },
+            {
+                id: 'black-out-cherry',
+                name: 'Black Out Cherry',
+                notes: ['Heavy', 'Deep Calm', 'Good for Sleep'],
+                tag: 'sleep',
+                thc: '30%',
+                flavor: 'Dark cherry, earthy, floral',
+                image: BASE_IMAGE_URL + 'black-out-cherry.jpg'
+            },
+            {
+                id: 'dark-knight',
+                name: 'Dark Knight',
+                notes: ['Heavy Body', 'Calm Mind', 'Sleepy'],
+                tag: 'sleep',
+                thc: '28%',
+                flavor: 'Berry, chocolate, earthy',
+                image: BASE_IMAGE_URL + 'dark-knight.jpg'
+            },
+            {
+                id: 'blank-check',
+                name: 'Blank Check',
+                notes: ['Balanced', 'Mellow', 'Relaxed'],
+                tag: 'relax',
+                thc: '27%',
+                flavor: 'Creamy, fruity, gassy',
+                image: BASE_IMAGE_URL + 'blank-check.jpg'
+            },
+            {
+                id: 'night-move',
+                name: 'Night Move',
+                notes: ['Calm', 'Heavy Body', 'Good Sleep'],
+                tag: 'sleep',
+                thc: '29%',
+                flavor: 'Deep berry, chocolate, pine',
+                image: BASE_IMAGE_URL + 'night-move.jpg'
+            },
+            {
+                id: 'oreo-stomper',
+                name: 'Oreo Stomper',
+                notes: ['Relaxed', 'Smooth', 'Mellow'],
+                tag: 'relax',
+                thc: '26%',
+                flavor: 'Cookie, cream, grape',
+                image: BASE_IMAGE_URL + 'oreo-stomper.jpg'
+            },
+            {
+                id: 'watermelon-zkittlez',
+                name: 'Watermelon Zkittlez',
+                notes: ['Relaxed', 'Fresh', 'Uplifting'],
+                tag: 'relax',
+                thc: '26%',
+                flavor: 'Watermelon, candy, mixed fruit',
+                image: BASE_IMAGE_URL + 'watermelon-zkittlez.jpg'
+            },
+            {
+                id: 'colombian-gold',
+                name: 'Colombian Gold',
+                notes: ['Energetic', 'Happy', 'Focused'],
+                tag: 'uplift',
+                thc: '22%',
+                flavor: 'Earthy wood, herbal, dried floral',
+                image: BASE_IMAGE_URL + 'colombian-gold.jpg'
+            },
+            {
+                id: 'ice-cream-cake',
+                name: 'Ice Cream Cake',
+                notes: ['Relaxed', 'Calm', 'Sleepy'],
+                tag: 'sleep',
+                thc: '28%',
+                flavor: 'Sweet cream, vanilla',
+                image: BASE_IMAGE_URL + 'ice-cream-cake.jpg'
+            },
+            {
+                id: 'bangkok-og',
+                name: 'Bangkok OG',
+                notes: ['Heavy Head', 'Deep Relaxation', 'Sleepy'],
+                tag: 'sleep',
+                thc: '31%',
+                flavor: 'Earthy, pine, light citrus',
+                image: BASE_IMAGE_URL + 'bangkok-og.jpg'
+            }
         ];
 
-        let cart = [];
-
-        // --- DOM Elements ---
-        const cartDrawer = document.getElementById('cartDrawer');
-        const openCartBtn = document.getElementById('openCartBtn');
-        const closeCartBtn = document.getElementById('closeCartBtn');
-        const waBtn = document.getElementById('waBtn');
-        const lineBtn = document.getElementById('lineBtn');
-        const productGrid = document.getElementById('productGrid');
-        const yearSpan = document.getElementById('year');
-        const filters = document.querySelectorAll('.filters .chip');
-        const cartItemsContainer = document.getElementById('cartItems');
-        const cartCountBadge = document.getElementById('cartCount');
-        const totalItemsElement = document.getElementById('totalItems');
-        const copyHint = document.getElementById('copyHint');
+        // --- DOM Element References ---
+        const $grid = document.getElementById('productGrid');
+        const $cartCount = document.getElementById('cartCount');
+        const $cartDrawer = document.getElementById('cartDrawer');
+        const $drawerBackdrop = document.getElementById('drawerBackdrop');
+        const $openCartBtn = document.getElementById('openCartBtn');
+        const $closeCartBtn = document.getElementById('closeCartBtn');
+        const $cartItems = document.getElementById('cartItems');
+        const $totalItems = document.getElementById('totalItems');
+        const $waBtn = document.getElementById('waBtn');
+        const $lineBtn = document.getElementById('lineBtn');
+        const $year = document.getElementById('year');
+        const $copyHint = document.getElementById('copyHint');
 
         // --- Initialization ---
-
-        window.onload = function() {
-            yearSpan.textContent = new Date().getFullYear();
+        document.addEventListener('DOMContentLoaded', () => {
+            $year.textContent = new Date().getFullYear();
             renderProducts(products);
-            updateCartUI();
-
-            // Event Listeners
-            openCartBtn.addEventListener('click', toggleCart);
-            closeCartBtn.addEventListener('click', toggleCart);
-            waBtn.addEventListener('click', handleWhatsAppOrder);
-            lineBtn.addEventListener('click', handleLineOrder);
+            loadCart();
+            bindFilters();
             
-            filters.forEach(chip => {
-                chip.addEventListener('click', handleFilter);
+            // Drawer Controls
+            $openCartBtn.addEventListener('click', openDrawer);
+            $closeCartBtn.addEventListener('click', closeDrawer);
+            $drawerBackdrop.addEventListener('click', closeDrawer);
+
+            // Chat-to-Order Handlers
+            $waBtn.addEventListener('click', handleWhatsAppOrder);
+            $lineBtn.addEventListener('click', handleLineOrder);
+        });
+
+        // ⭐⭐⭐ Product Rendering (Updated) ⭐⭐⭐
+        function renderProducts(list){
+            $grid.innerHTML = '';
+            // Default placeholder if the specified images fail to load
+            const fallbackImage = 'https://placehold.co/250x160/1fa36a/0f3d2e?text=Product';
+
+            list.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-media">
+                        <img src="${p.image}" alt="รูปภาพ ${p.name}" onerror="this.onerror=null;this.src='${fallbackImage}'">
+                    </div>
+                    
+                    <div class="card-body">
+                        <h3 class="card-title">${p.name}</h3>
+                        
+                        <div class="product-details">
+                            <p><strong>THC:</strong> ${p.thc}</p>
+                            <p><strong>Flavor:</strong> ${p.flavor}</p>
+                        </div>
+                        
+                        <div class="badges">
+                            ${p.notes.map(n => `<span class="badge-soft">${n}</span>`).join('')}
+                        </div>
+                        <button class="btn-add" data-id="${p.id}">เพิ่มรายการ</button>
+                    </div>
+                `;
+                $grid.appendChild(card);
             });
-        };
-        
-        // --- Cart Functions ---
 
-        function toggleCart() {
-            cartDrawer.classList.toggle('open');
+            // attach add handlers
+            $grid.querySelectorAll('.btn-add').forEach(btn => {
+                btn.addEventListener('click', () => addToCart(btn.dataset.id));
+            });
+        }
+        // ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+
+
+        /* ---------------------------
+            Filters (UI only)
+        ----------------------------*/
+        function bindFilters(){
+            const chips = document.querySelectorAll('.chip');
+            chips.forEach(c => c.addEventListener('click', () => {
+                chips.forEach(x => x.classList.remove('is-active'));
+                c.classList.add('is-active');
+                const tag = c.dataset.filter;
+                if(tag === 'all') renderProducts(products);
+                else renderProducts(products.filter(p => p.tag === tag));
+            }));
         }
 
-        function updateCartUI() {
-            cartItemsContainer.innerHTML = '';
-            let totalItemsCount = 0;
+        /* ---------------------------
+            Cart (no payment)
+        ----------------------------*/
+        let cart = []; // [{id, name, qty}]
 
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = `<p class="muted" style="text-align: center; margin-top: 50px; font-size: 1.1rem;">ตะกร้าว่างเปล่า</p>`;
-            } else {
-                cart.forEach(item => {
-                    const product = products.find(p => p.id === item.id);
-                    if (!product) return;
-
-                    totalItemsCount += item.quantity;
-
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'cart-item';
-                    itemElement.innerHTML = `
-                        <div>
-                            <div class="item-title">${product.name}</div>
-                            <small class="muted">${product.description.split(' ')[0]}...</small>
-                        </div>
-                        <div class="qty">
-                            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-                            <button class="remove-btn" onclick="removeFromCart(${item.id})">ลบ</button>
-                        </div>
-                    `;
-                    cartItemsContainer.appendChild(itemElement);
-                });
-            }
-
-            cartCountBadge.textContent = totalItemsCount;
-            totalItemsElement.textContent = totalItemsCount;
-        }
-
-        function addToCart(productId) {
-            const existingItem = cart.find(item => item.id === productId);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({ id: productId, quantity: 1 });
-            }
+        function loadCart(){
+            try{
+                const raw = localStorage.getItem('mrgreen_cart');
+                cart = raw ? JSON.parse(raw) : [];
+            }catch(_e){ cart = []; }
             updateCartUI();
         }
 
-        function updateQuantity(productId, delta) {
-            const item = cart.find(i => i.id === productId);
-            if (!item) return;
+        function saveCart(){
+            localStorage.setItem('mrgreen_cart', JSON.stringify(cart));
+        }
 
-            item.quantity += delta;
-            
-            if (item.quantity <= 0) {
-                removeFromCart(productId);
+        function addToCart(id){
+            const p = products.find(x => x.id === id);
+            if(!p) return;
+            const existing = cart.find(x => x.id === id);
+            if(existing) existing.qty += 1;
+            else cart.push({ id, name: p.name, qty: 1 });
+            saveCart();
+            updateCartUI();
+            openDrawer();
+        }
+
+        function removeFromCart(id){
+            cart = cart.filter(x => x.id !== id);
+            saveCart(); updateCartUI();
+        }
+
+        function changeQty(id, delta){
+            const item = cart.find(x => x.id === id);
+            if(!item) return;
+            item.qty = item.qty + delta;
+            if(item.qty <= 0) {
+                removeFromCart(id);
             } else {
+                saveCart(); 
                 updateCartUI();
             }
         }
 
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            updateCartUI();
+        function updateCartUI(){
+            $cartCount.textContent = cart.reduce((s,x) => s + x.qty, 0);
+            $totalItems.textContent = $cartCount.textContent;
+
+            if(cart.length === 0){
+                $cartItems.innerHTML = `<p class="muted" style="padding:8px 4px; text-align:center; margin-top:50px; font-size:1.1rem;">ยังไม่มีรายการ กด “เพิ่มรายการ” จากหน้าสินค้าได้เลย</p>`;
+                return;
+            }
+
+            $cartItems.innerHTML = cart.map(x => `
+                <div class="cart-item">
+                    <div>
+                        <div class="item-title">${x.name}</div>
+                        <button class="remove-btn" data-id="${x.id}">ลบ</button>
+                    </div>
+                    <div class="qty">
+                        <button class="qty-btn" data-action="minus" data-id="${x.id}">−</button>
+                        <div>${x.qty}</div>
+                        <button class="qty-btn" data-action="plus" data-id="${x.id}">+</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // bind qty & remove
+            $cartItems.querySelectorAll('.qty-btn').forEach(b=>{
+                const id = b.dataset.id;
+                const action = b.dataset.action;
+                b.addEventListener('click', () => changeQty(id, action === 'plus' ? +1 : -1));
+            });
+            $cartItems.querySelectorAll('.remove-btn').forEach(b=>{
+                b.addEventListener('click', () => removeFromCart(b.dataset.id));
+            });
         }
 
-        // --- Order Contact Handlers ---
+        /* ---------------------------
+            Drawer controls
+        ----------------------------*/
+        function openDrawer(){ $cartDrawer.classList.add('open'); }
+        function closeDrawer(){ $cartDrawer.classList.remove('open'); }
 
-        function getOrderText() {
-            if (cart.length === 0) return "สวัสดีครับ/ค่ะ สนใจสั่งสินค้าครับ/ค่ะ";
+        /* ---------------------------
+            Chat-to-Order message
+        ----------------------------*/
+        function buildOrderMessage(){
+            const ts = new Date().toLocaleString('th-TH');
+            const head = `สวัสดีครับ ผมต้องการสั่งซื้อจาก Mr.Green\nเวลาที่สั่ง: ${ts}\n\nรายการ:\n`;
+            const body = cart.length
+                ? cart.map((x,i)=>`${i+1}. ${x.name} × ${x.qty}`).join('\n')
+                : '(ยังไม่มีรายการในตะกร้า)';
+            const tail = `\n\n[โปรดระบุชื่อ ที่อยู่ และเบอร์โทรศัพท์สำหรับจัดส่ง]\n\nติดต่อกลับได้เลยครับ ขอบคุณครับ 🙏`;
+            return head + body + tail;
+        }
 
-            const orderList = cart.map(item => {
-                const product = products.find(p => p.id === item.id);
-                return `- ${product.name} x ${item.quantity}`;
-            }).join('\n');
-            
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-            return `สวัสดีครับ/ค่ะ สนใจสั่งรายการนี้ครับ/ค่ะ (รวม ${totalItems} รายการ):\n\n${orderList}\n\n[ระบุชื่อ ที่อยู่ และเบอร์โทรศัพท์สำหรับจัดส่งที่นี่]`;
+        function encodeWhatsAppText(t){
+            return encodeURIComponent(t);
         }
 
         function handleWhatsAppOrder() {
-            const orderText = getOrderText();
-            const encodedText = encodeURIComponent(orderText);
-            const whatsappUrl = `https://wa.me/${APP_CONTACT.waPhone}?text=${encodedText}`;
-            window.open(whatsappUrl, '_blank');
+            const msg = buildOrderMessage();
+            const link = `${window.APP_CONTACT.waLink}?text=${encodeWhatsAppText(msg)}`;
+            window.open(link, '_blank', 'noopener');
         }
+        
+        async function handleLineOrder() {
+            const msg = buildOrderMessage();
 
-        function handleLineOrder() {
-            const orderText = getOrderText();
-            
-            try {
-                // Copy to clipboard for LINE (as LINE chat links don't always support pre-filled text easily)
+            // 1) คัดลอกข้อความให้ (เพื่อให้แปะใน LINE ได้ทันที)
+            try{
+                // Fallback for document.execCommand('copy') is generally preferred in Canvas
                 const textarea = document.createElement('textarea');
-                textarea.value = orderText;
+                textarea.value = msg;
                 document.body.appendChild(textarea);
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
 
-                // Show confirmation hint
-                copyHint.textContent = 'รายการถูกคัดลอกไปยังคลิปบอร์ดแล้ว! กำลังเปิด LINE...';
-                copyHint.style.display = 'block';
-                setTimeout(() => { copyHint.style.display = 'none'; }, 5000);
+                $copyHint.textContent = 'คัดลอกรายการแล้ว ✔ กำลังเปิด LINE...';
                 
-                // Open LINE link
-                setTimeout(() => {
-                    window.open(APP_CONTACT.lineLink, '_blank');
-                }, 1000);
-
-            } catch (err) {
-                console.error('Could not copy text to clipboard: ', err);
-                copyHint.textContent = 'ไม่สามารถคัดลอกได้: โปรดคัดลอกข้อความเองและเปิด LINE';
+            }catch(_e){
+                $copyHint.textContent = 'คัดลอกไม่สำเร็จ โปรดคัดลอกด้วยตนเองในหน้าถัดไป';
             }
+
+            // Show hint temporarily
+            $copyHint.style.display = 'block';
+            setTimeout(() => { $copyHint.style.display = 'none'; }, 5000);
+
+            // 2) เปิดลิงก์ LINE
+            setTimeout(() => {
+                window.open(window.APP_CONTACT.lineLink, '_blank', 'noopener');
+            }, 500);
         }
 
-        // --- Product Grid Rendering and Filtering ---
-
-        function renderProducts(productArray) {
-            productGrid.innerHTML = productArray.map(product => {
-                const badgeHtml = product.categories.map(cat => 
-                    `<span class="badge-soft">${cat}</span>`
-                ).join('');
-
-                return `
-                    <div class="card" data-categories="${product.categories.join(' ')}">
-                        <div class="card-media">
-                            <img src="${product.imageUrl}" alt="${product.name}" onerror="this.onerror=null;this.src='https://placehold.co/250x160/1fa36a/0f3d2e?text=Product'" />
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">${product.name}</h3>
-                            <p class="description">${product.description}</p>
-                            <div class="badges">${badgeHtml}</div>
-                            <button class="btn-add" onclick="addToCart(${product.id})">เพิ่มลงรายการ</button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-        
-        function handleFilter(event) {
-            const filterValue = event.target.getAttribute('data-filter');
-
-            // Update active chip styling
-            filters.forEach(chip => chip.classList.remove('is-active'));
-            event.target.classList.add('is-active');
-
-            // Filter products
-            if (filterValue === 'all') {
-                renderProducts(products);
-            } else {
-                const filteredProducts = products.filter(product => 
-                    product.categories.includes(filterValue)
-                );
-                renderProducts(filteredProducts);
+        /* Accessibility: Ctrl+C/Cmd+C to open cart from header */
+        document.addEventListener('keydown', (e)=>{
+            if(e.key === 'c' && (e.ctrlKey || e.metaKey)){ 
+                openDrawer();
+                e.preventDefault(); 
             }
-        }
-
+        });
     </script>
 </body>
 </html>
