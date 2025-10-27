@@ -9,6 +9,78 @@ const BASE_IMAGE_URL = "https://raw.githubusercontent.com/ManOnTheMoon420/Mister
 const products = [
   // --- EXISTING PRODUCTS (with 'image' field added) ---
   {
+    id: 'cookies-n-cream',
+    name: 'Cookies n Cream',
+    notes: ['Light High', 'Happy', 'Clear Mind'],
+    tag: 'focus',
+    thc: '23%',
+    flavor: 'Cookie, cream, vanilla',
+    image: BASE_IMAGE_URL + 'cookies-n-cream.jpg' // ⭐ เพิ่ม image field
+  },
+  {
+    id: 'lemon-diesel',
+    name: 'Lemon Diesel',
+    notes: ['Energetic', 'Focused', 'Cheerful'],
+    tag: 'focus',
+    thc: '25%',
+    flavor: 'Lemon, gas, herbal',
+    image: BASE_IMAGE_URL + 'lemon-diesel.png' // ⭐ เพิ่ม image field
+  },
+  {
+    id: 'mochi-gelato',
+    name: 'Mochi Gelato',
+    notes: ['Smooth High', 'Happy', 'Light Mind'],
+    tag: 'uplift',
+    thc: '24%',
+    flavor: 'Creamy, fruity, floral',
+    image: BASE_IMAGE_URL + 'mochi-gelato.png' // ⭐ เพิ่ม image field
+  },
+  {
+    id: 'sub-zero',
+    name: 'Sub Zero',
+    notes: ['Cooling', 'Clear-headed', 'Fresh'],
+    tag: 'focus',
+    thc: '23%',
+    flavor: 'Mint, menthol, floral',
+    image: BASE_IMAGE_URL + 'sub-zero.png' // ⭐ เพิ่ม image field
+  },
+{
+    id: 'super-boof',
+    name: 'Super Boof',
+    notes: ['Euphoric', 'Bright', 'Relaxing'],
+    tag: 'relax',
+    thc: '27%',
+    flavor: 'Sweet fruit, cream, gas',
+    image: BASE_IMAGE_URL + 'super-boof.png' // ⭐ เพิ่ม image field
+  },
+  {
+    id: 'bolo-runtz',
+    name: 'Bolo Runtz',
+    notes: ['Happy', 'Playful', 'Light High'],
+    tag: 'uplift',
+    thc: '24%',
+    flavor: 'Candy, fruity, creamy',
+    image: BASE_IMAGE_URL + 'bolo-runtz.png' // ⭐ https://raw.githubusercontent.com//ManOnTheMoon420/MisterGreen/main/images/bolo-runtz.png
+  },
+ {
+    id: 'zoap',
+    name: 'Zoap',
+    notes: ['Balanced', 'Clear-headed', 'Relaxed'],
+    tag: 'relax',
+    thc: '25%',
+    flavor: 'Floral, fruity, soapy sweet',
+    image: BASE_IMAGE_URL + 'zoap.png' // ⭐ เพิ่ม image field
+  },
+  {
+    id: 'sour-apple',
+    name: 'Sour Apple',
+    notes: ['Refreshing', 'Energetic', 'Cheerful'],
+    tag: 'uplift',
+    thc: '24%',
+    flavor: 'Sour apple, gas, sweet',
+    image: BASE_IMAGE_URL + 'sour-apple.png' // ⭐ เพิ่ม image field
+  },
+   {
     id: 'king-shadow',
     name: 'King Shadow',
     notes: ['Relax', 'Creamy', 'Earthy'],
@@ -82,24 +154,6 @@ const products = [
     image: BASE_IMAGE_URL + 'black-out-cherry.jpg' // ⭐ เพิ่ม image field
   },
   {
-    id: 'cookies-n-cream',
-    name: 'Cookies n Cream',
-    notes: ['Light High', 'Happy', 'Clear Mind'],
-    tag: 'focus',
-    thc: '23%',
-    flavor: 'Cookie, cream, vanilla',
-    image: BASE_IMAGE_URL + 'cookies-n-cream.jpg' // ⭐ เพิ่ม image field
-  },
-  {
-    id: 'lemon-diesel',
-    name: 'Lemon Diesel',
-    notes: ['Energetic', 'Focused', 'Cheerful'],
-    tag: 'focus',
-    thc: '25%',
-    flavor: 'Lemon, gas, herbal',
-    image: BASE_IMAGE_URL + 'lemon-diesel.png' // ⭐ เพิ่ม image field
-  },
-  {
     id: 'dark-knight',
     name: 'Dark Knight',
     notes: ['Heavy Body', 'Calm Mind', 'Sleepy'],
@@ -136,42 +190,6 @@ const products = [
     image: BASE_IMAGE_URL + 'oreo-stomper.jpg' // ⭐ เพิ่ม image field
   },
   {
-    id: 'mochi-gelato',
-    name: 'Mochi Gelato',
-    notes: ['Smooth High', 'Happy', 'Light Mind'],
-    tag: 'uplift',
-    thc: '24%',
-    flavor: 'Creamy, fruity, floral',
-    image: BASE_IMAGE_URL + 'mochi-gelato.png' // ⭐ เพิ่ม image field
-  },
-  {
-    id: 'sub-zero',
-    name: 'Sub Zero',
-    notes: ['Cooling', 'Clear-headed', 'Fresh'],
-    tag: 'focus',
-    thc: '23%',
-    flavor: 'Mint, menthol, floral',
-    image: BASE_IMAGE_URL + 'sub-zero.png' // ⭐ เพิ่ม image field
-  },
-  {
-    id: 'super-boof',
-    name: 'Super Boof',
-    notes: ['Euphoric', 'Bright', 'Relaxing'],
-    tag: 'relax',
-    thc: '27%',
-    flavor: 'Sweet fruit, cream, gas',
-    image: BASE_IMAGE_URL + 'super-boof.png' // ⭐ เพิ่ม image field
-  },
-  {
-    id: 'bolo-runtz',
-    name: 'Bolo Runtz',
-    notes: ['Happy', 'Playful', 'Light High'],
-    tag: 'uplift',
-    thc: '24%',
-    flavor: 'Candy, fruity, creamy',
-    image: BASE_IMAGE_URL + 'bolo-runtz.png' // ⭐ https://raw.githubusercontent.com//ManOnTheMoon420/MisterGreen/main/images/bolo-runtz.png
-  },
-  {
     id: 'watermelon-zkittlez',
     name: 'Watermelon Zkittlez',
     notes: ['Relaxed', 'Fresh', 'Uplifting'],
@@ -179,15 +197,6 @@ const products = [
     thc: '26%',
     flavor: 'Watermelon, candy, mixed fruit',
     image: BASE_IMAGE_URL + 'watermelon-zkittlez.jpg' // ⭐ เพิ่ม image field
-  },
-  {
-    id: 'zoap',
-    name: 'Zoap',
-    notes: ['Balanced', 'Clear-headed', 'Relaxed'],
-    tag: 'relax',
-    thc: '25%',
-    flavor: 'Floral, fruity, soapy sweet',
-    image: BASE_IMAGE_URL + 'zoap.png' // ⭐ เพิ่ม image field
   },
   {
     id: 'colombian-gold',
@@ -206,15 +215,6 @@ const products = [
     thc: '28%',
     flavor: 'Sweet cream, vanilla',
     image: BASE_IMAGE_URL + 'ice-cream-cake.jpg' // ⭐ เพิ่ม image field
-  },
-  {
-    id: 'sour-apple',
-    name: 'Sour Apple',
-    notes: ['Refreshing', 'Energetic', 'Cheerful'],
-    tag: 'uplift',
-    thc: '24%',
-    flavor: 'Sour apple, gas, sweet',
-    image: BASE_IMAGE_URL + 'sour-apple.png' // ⭐ เพิ่ม image field
   },
   {
     id: 'bangkok-og',
