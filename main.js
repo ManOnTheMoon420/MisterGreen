@@ -97,7 +97,7 @@ const products = [
     tag: 'focus',
     thc: '25%',
     flavor: 'Lemon, gas, herbal',
-    image: BASE_IMAGE_URL + 'lemon-diesel.jpg' // ⭐ เพิ่ม image field
+    image: BASE_IMAGE_URL + 'lemon-diesel.png' // ⭐ เพิ่ม image field
   },
   {
     id: 'dark-knight',
@@ -142,7 +142,7 @@ const products = [
     tag: 'uplift',
     thc: '24%',
     flavor: 'Creamy, fruity, floral',
-    image: BASE_IMAGE_URL + 'mochi-gelato.jpg' // ⭐ เพิ่ม image field
+    image: BASE_IMAGE_URL + 'mochi-gelato.png' // ⭐ เพิ่ม image field
   },
   {
     id: 'sub-zero',
@@ -151,7 +151,7 @@ const products = [
     tag: 'focus',
     thc: '23%',
     flavor: 'Mint, menthol, floral',
-    image: BASE_IMAGE_URL + 'sub-zero.jpg' // ⭐ เพิ่ม image field
+    image: BASE_IMAGE_URL + 'sub-zero.png' // ⭐ เพิ่ม image field
   },
   {
     id: 'super-boof',
@@ -160,7 +160,7 @@ const products = [
     tag: 'relax',
     thc: '27%',
     flavor: 'Sweet fruit, cream, gas',
-    image: BASE_IMAGE_URL + 'super-boof.jpg' // ⭐ เพิ่ม image field
+    image: BASE_IMAGE_URL + 'super-boof.png' // ⭐ เพิ่ม image field
   },
   {
     id: 'bolo-runtz',
@@ -169,7 +169,7 @@ const products = [
     tag: 'uplift',
     thc: '24%',
     flavor: 'Candy, fruity, creamy',
-    image: BASE_IMAGE_URL + 'bolo-runtz.jpg' // ⭐ เพิ่ม image field
+    image: BASE_IMAGE_URL + 'bolo-runtz.png' // ⭐ เพิ่ม image field
   },
   {
     id: 'watermelon-zkittlez',
@@ -187,7 +187,7 @@ const products = [
     tag: 'relax',
     thc: '25%',
     flavor: 'Floral, fruity, soapy sweet',
-    image: BASE_IMAGE_URL + 'zoap.jpg' // ⭐ เพิ่ม image field
+    image: BASE_IMAGE_URL + 'zoap.png' // ⭐ เพิ่ม image field
   },
   {
     id: 'colombian-gold',
@@ -214,7 +214,7 @@ const products = [
     tag: 'uplift',
     thc: '24%',
     flavor: 'Sour apple, gas, sweet',
-    image: BASE_IMAGE_URL + 'sour-apple.jpg' // ⭐ เพิ่ม image field
+    image: BASE_IMAGE_URL + 'sour-apple.png' // ⭐ เพิ่ม image field
   },
   {
     id: 'bangkok-og',
