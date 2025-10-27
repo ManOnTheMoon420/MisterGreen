@@ -101,13 +101,30 @@ body{
   overflow:hidden;box-shadow: var(--shadow);transition:.25s transform;
 }
 .card:hover{transform: translateY(-4px);}
+/* ⭐ แก้ไข: กำหนดกรอบรูปให้พร้อมรับรูปภาพเต็มขนาด ⭐ */
 .card-media{
-  height:160px;background:
+  height:160px;
+  background:
     radial-gradient(500px 180px at 30% 0%, rgba(31,163,106,.25), transparent),
     radial-gradient(500px 220px at 80% -20%, rgba(31,179,179,.28), transparent),
     linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-  display:grid;place-items:center;color:#cffff1;font-size:40px
+  
+  /* ใช้ Flexbox เพื่อจัดกึ่งกลางรูปภาพที่ถูก contain */
+  display:flex;
+  justify-content:center;
+  align-items:center; 
+  overflow:hidden; /* สำคัญ: เพื่อไม่ให้รูปภาพที่เกินกรอบแสดงออกมา */
+  color:#cffff1;font-size:40px
 }
+
+/* ⭐ เพิ่มกฎนี้: เพื่อบังคับให้รูปภาพย่อขนาดลงพอดีกับกรอบ ⭐ */
+.card-media img {
+    width: 100%;
+    height: 100%;
+    /* ทำให้รูปภาพแสดงครบถ้วน ไม่ถูกตัดส่วน */
+    object-fit: contain; 
+}
+
 .card-body{padding:16px}
 .card-title{margin:0 0 6px;font-size:1.1rem;font-weight:700}
 .badges{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
